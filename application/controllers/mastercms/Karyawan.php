@@ -74,65 +74,86 @@ class Karyawan extends MY_Controller
   {
     $data = $this->Mkaryawan->get_by_id($karyawan_id);
     $this->Mkaryawan->hapus($karyawan_id);
-    $this->session->set_flashdata('msg', '<div class="alert alert-danger"><button class="close" data-dismiss="alert">×</button><strong>Sukses!</strong> Data berhasil dihapus.</div>');
+    $this->session->set_flashdata('msg', '<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button><strong>Sukses!</strong> Data berhasil dihapus.</div>');
     redirect("mastercms/karyawan", "refresh");
   }
-  function hapus_karyawan()
-  {
-    $id=$this->input->get('id');
-    $data = $this->Mkaryawan->get_by_id($id);
+  // function hapus_karyawan()
+  // {
+  //   $id=$this->input->get('id');
+  //   $data = $this->Mkaryawan->get_by_id($id);
 
-    $this->Mkaryawan->hapus($id);
-    redirect("mastercms/karyawan", "refresh");
-  }
+  //   $this->Mkaryawan->hapus($id);
+  //   redirect("mastercms/karyawan", "refresh");
+  // }
   function tampil_detail()
   {
     $detail = $this->db->query('SELECT * FROM _karyawan WHERE karyawan_id='.$_GET['id'].'')->row_array();
-    if (empty($detail)) {
-      echo "Data tidak ditemukan.";
-    }
+    $lokasi = $this->db->query('SELECT l.lokasi_nama, l.perusahaan_title FROM _lokasi l RIGHT JOIN _karyawan k ON k.lokasi_id=l.lokasi_id where k.karyawan_id='.$_GET['id'].' ')->row_array();
+    if($detail['karyawan_password']==NULL) {$password = '<span class="label label-important">tidak diatur</span>';}else{$password = '<span class="label label-success">diatur</span>';}
+    if(!empty($detail['no_hp'])) {$phone = $detail['no_hp'];}else{$phone = "-";}
+    if(!empty($detail['karyawan_ttl'])){$lahir = tanggal($detail['karyawan_ttl']);}else{$lahir = "-";}
+    if(!empty($detail['karyawan_salary'])){$gaji = rupiah($detail['karyawan_salary']);}else{$gaji = rupiah(0);}
+    if (empty($detail)) { echo "Data tidak ditemukan."; }
     else{
-      // print_r($detail);
-      echo '<div class="modal-header">';
-      echo'<button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Data</h3>';
-        echo '</div>
-        <div class="modal-body">
-        <table class="table table-stripped" align="center">';
-        echo '
-          <tr>
-            <td>Nama Karyawan</td>
-            <td>:</td>
-            <td>'.$detail['karyawan_nama'].'</td>
-          </tr>
-          <tr>
-            <td>Jabatan</td>
-            <td>:</td>a
-            <td>'.$detail['karyawan_jabatan'].'</td>
-          </tr>
-          <tr>
-            <td>Tanggal Lahir</td>
-            <td>:</td>a
-            <td>'.tanggal($detail['karyawan_ttl']).'</td>
-          </tr>
-          <tr>
-            <td>Email</td>
-            <td>:</td>a
-            <td>'.$detail['karyawan_email'].'</td>
-          </tr>
-          <tr>
-            <td>No.Telp</td>
-            <td>:</td>a
-            <td>'.$detail['no_hp'].'</td>
-          </tr>
-          <tr>
-            <td>Alamat</td>
-            <td>:</td>a
-            <td>'.$detail['karyawan_alamat'].'</td>
-          </tr>
-        ';
-        echo '</table>
-        </div><div class="modal-footer"><a data-dismiss="modal" class="btn btn-default" href="#">Tutup</a></div>';
+      echo '<table class="table table-stripped" width="100%"><tbody>';
+      echo '
+        <tr>
+          <td style="width:25%;">Asal Perusahaan</td>
+          <td width="5px">:</td>
+          <td class="detail">'.$lokasi['lokasi_nama'].'</td>
+        </tr>
+        <tr>
+          <td style="width:25%;">Tipe Perusahaan</td>
+          <td>:</td>
+          <td>'.$lokasi['perusahaan_title'].'</td>
+        </tr>
+        <tr>
+          <td style="width:25%;">Nama Karyawan</td>
+          <td>:</td>
+          <td>'.$detail['karyawan_nama'].'</td>
+        </tr>
+        <tr>
+          <td>Jabatan</td>
+          <td>:</td>
+          <td>'.$detail['karyawan_jabatan'].'</td>
+        </tr>
+        <tr>
+          <td>Tanggal Lahir</td>
+          <td>:</td>
+          <td>'.$lahir.'</td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>:</td>
+          <td>'.$detail['karyawan_email'].'</td>
+        </tr>
+        <tr>
+          <td>User Login</td>
+          <td>:</td>
+          <td>'.$detail['karyawan_user'].'</td>
+        </tr>
+        <tr>
+          <td>User Password</td>
+          <td>:</td>
+          <td>'.$password.'</td>
+        </tr>
+        <tr>
+          <td>No.Telp</td>
+          <td>:</td>
+          <td>'.$phone.'</td>
+        </tr>
+        <tr>
+          <td>Alamat</td>
+          <td>:</td>
+          <td>'.$detail['karyawan_alamat'].'</td>
+        </tr>
+        <tr>
+          <td>Gaji Pokok</td>
+          <td>:</td>
+          <td>'.$gaji.'</td>
+        </tr>
+      ';
+      echo '</tbody></table>';
     }
   }
 
