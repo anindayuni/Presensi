@@ -58,63 +58,63 @@ class Perusahaan extends MY_Controller
 
 		if (empty($jam_kerja)) {
 	echo 'Data Masih Kosong';                                                      	# code...
-	}                 
+}                 
 
-	else{                                     
+else{                                     
 	// echo ''.$_GET['id'].'';
 	// print_r($jam_kerja);
-		echo '<div class="modal-header">';
-		echo'<button data-dismiss="modal" class="close" type="button">×</button>
-		<h3>'.$nama_lokasi['perusahaan_nama'].'</h3>';
-		echo '</div>
-		<div class="modal-body">
-		<table class="table" align="center">';
-		foreach ($jam_kerja as $key => $j) : 
+	echo '<div class="modal-header">';
+	echo'<button data-dismiss="modal" class="close" type="button">×</button>
+	<h3>'.$nama_lokasi['perusahaan_nama'].'</h3>';
+	echo '</div>
+	<div class="modal-body">
+	<table class="table" align="center">';
+	foreach ($jam_kerja as $key => $j) : 
 
-			echo '<tr>
-			<td>'.$j['kerja_hari'].'</td>
-			<td title="Jam Masuk">'.$j['jam_masuk'].'</td>
-			<td>-</td>
-			<td title="Jam Selesai">'.$j['jam_keluar'].'</td>
+		echo '<tr>
+		<td>'.$j['kerja_hari'].'</td>
+		<td title="Jam Masuk">'.$j['jam_masuk'].'</td>
+		<td>-</td>
+		<td title="Jam Selesai">'.$j['jam_keluar'].'</td>
 
-			</tr>';
+		</tr>';
 
-		endforeach ;
+	endforeach ;
 
-		echo '     </table>
-		</div>
-		<div class="modal-footer"><a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a> 
+	echo '     </table>
+	</div>
+	<div class="modal-footer"><a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a> 
 
-		</div>';
+	</div>';
 
+}
+
+}
+
+function editprofil($id)
+{
+	$data['title'] = 'Edit Profil';
+	$data['profil'] = $this->Mperusahaan->profil($id);
+
+	if ($this->input->post()) {
+		$input = $this->input->post();
+		$this->Mperusahaan->edit_profil($id, $input);
+		$this->session->set_flashdata('msg', '<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button><strong>Sukses!</strong> Data berhasil diubah.</div>');
+		redirect('mastercms/home', 'refresh');
 	}
+	$this->render_page('backend/perusahaan/edit-profil', $data);
+}
 
-	}
+function detail($id)
+{
+	$data['detail'] = $this->Mperusahaan->get_by_id($id);
+	$data['jamkerja'] = $this->Mperusahaan->get_jamkerja($id);
+	$data['id'] = $id;
+	$this->render_page('backend/perusahaan/detail',$data);
+}
 
-	function editprofil($id)
-	{
-		$data['title'] = 'Edit Profil';
-		$data['profil'] = $this->Mperusahaan->profil($id);
-
-		if ($this->input->post()) {
-			$input = $this->input->post();
-			$this->Mperusahaan->edit_profil($id, $input);
-			$this->session->set_flashdata('msg', '<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button><strong>Sukses!</strong> Data berhasil diubah.</div>');
-			redirect('mastercms/home', 'refresh');
-		}
-		$this->render_page('backend/perusahaan/edit-profil', $data);
-	}
-
-	function detail($id)
-	{
-		$data['detail'] = $this->Mperusahaan->get_by_id($id);
-		$data['jamkerja'] = $this->Mperusahaan->get_jamkerja($id);
-		$data['id'] = $id;
-		$this->render_page('backend/perusahaan/detail',$data);
-	}
-
-	function add()
-	{
+function add()
+{
 	$this->load->library('ciqrcode');
 
 	if ($this->input->post()) {
