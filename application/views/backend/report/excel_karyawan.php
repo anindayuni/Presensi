@@ -4,7 +4,25 @@ header("Content-Disposition: attachment; filename=$title.xls");
 header("Pragma: no-cache");
 header("Expires: 0");
 ?>
-
+<table width="100%">
+	<tbody>
+		<tr>
+			<td colspan="7" align="center"><font size="4"><b>Laporan Presensi Karyawan Bulan <?= bulan($bulan)." ".$tahun; ?></b></font></td>
+		</tr>
+		<tr><td colspan="7">&nbsp;</td></tr>
+		<tr>
+			<td style="font-weight: bold;" colspan="2">Nama Karyawan</td>
+			<td>:</td>
+			<td colspan="4"><?= $karyawan; ?></td>
+		</tr>
+		<tr>
+			<td style="font-weight: bold;" colspan="2">Karyawan Perusahaan</td>
+			<td>:</td>
+			<td colspan="4"><?= $lokasi_nama['lokasi_nama']; ?></td>
+		</tr>
+	</tbody>
+</table>
+<br/>
 <table border="1" width="100%">
 	<thead>
 		<tr style="background-color: #e1e1e1;">

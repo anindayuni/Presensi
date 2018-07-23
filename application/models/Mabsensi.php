@@ -12,15 +12,23 @@ class Mabsensi extends CI_Model
 		$ambil = $this->db->get('_absensi');
 		return $ambil->result_array();
 	}
-	public function get_presensi_by_month()
+	public function get_presensi_by_day()
 	{
-		$perusahaan_id	= $_SESSION['user']['perusahaan_id'];
-		$this->db->where('_lokasi.perusahaan_id', $perusahaan_id);
-		$this->db->join('_karyawan', '_karyawan.karyawan_id = _absensi.karyawan_id');
-		$this->db->join('_lokasi', '_lokasi.lokasi_id = _karyawan.lokasi_id');
-		$this->db->order_by('_absensi.tanggal', 'DESC');
-		$ambil = $this->db->get('_absensi');
-		return $ambil->result_array();
+		$id = $_SESSION['user']['perusahaan_id'];
+		$data = $this->db->query("SELECT * FROM _absensi a
+			LEFT JOIN _karyawan k ON k.karyawan_id = a.karyawan_id
+			LEFT JOIN _lokasi l ON l.lokasi_id = k.lokasi_id
+			WHERE date(a.tanggal) = CURDATE() AND l.perusahaan_id = '$id' 
+			ORDER BY a.jam_masuk_absen DESC ");
+		return $data->result_array();
+
+		// $perusahaan_id	= $_SESSION['user']['perusahaan_id'];
+		// $this->db->where('_lokasi.perusahaan_id', $perusahaan_id);
+		// $this->db->join('_lokasi', '_lokasi.lokasi_id = _karyawan.lokasi_id', 'left');
+		// $this->db->join('_karyawan', '_karyawan.karyawan_id = _absensi.karyawan_id', 'left');
+		// $this->db->order_by('_absensi.tanggal', 'DESC');
+		// $ambil = $this->db->get('_absensi');
+		// return $ambil->result_array();
 	}
 	public function get_cabang(){
 		$perusahaan_id	= $_SESSION['user']['perusahaan_id'];
@@ -29,7 +37,7 @@ class Mabsensi extends CI_Model
 		return $data;
 	}
 	public function get_karyawan($id){
-		$hasil=$this->db->query("SELECT * FROM _karyawan WHERE lokasi_id='$id'");
+		$hasil = $this->db->query("SELECT * FROM _karyawan WHERE lokasi_id='$id'");
 		return $hasil->result();
 	}
 
@@ -170,9 +178,14 @@ class Mabsensi extends CI_Model
 		$ambil = $this->db->get();
 		return $ambil->result_array();
 	}
-
+	public function lokasi_nama($lokasi_id){
+		$this->db->select('lokasi_nama');
+		$this->db->where('lokasi_id', $lokasi_id);
+		$ambil = $this->db->get('_lokasi');
+		return $ambil->row_array();
+	}
 	public function lokasi_by_id($lokasi_id){
-		$this->db->where('_lokasi.lokasi_id', $lokasi_id);
+		$this->db->where('lokasi_id', $lokasi_id);
 		$ambil = $this->db->get('_lokasi');
 		return $ambil->result_array();
 	} //Mendapatkan data lokasi perusahaan berdasarkan id_lokasinya
