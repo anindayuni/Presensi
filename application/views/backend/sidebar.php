@@ -26,7 +26,7 @@
         </li>
         <li class="submenu"> <a href="#"><i class="icon-book"></i><span> Laporan </span> <span><b class="caret mysub-menu"></b></span></a>
             <ul>
-                <li><a href="<?php echo base_url('mastercms/absensi/summary'); ?>"></i> Summary</a></li>
+                <li><a href="<?php echo base_url('mastercms/absensi/summary'); ?>"></i> Ringkasan</a></li>
                 <li><a href="<?php echo base_url('mastercms/absensi'); ?>"></i> Presensi Karyawan</a></li>
             </ul>
         </li>

@@ -61,13 +61,13 @@
                             <div class="control-group">
                                 <label class="control-label"> No HP </label>
                                 <div class="controls">
-                                    <input type="text" name="no_hp" class="span3" value="" minlength="10">
+                                    <input type="number" name="no_hp" class="span3" value="" minlength="10">
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label"><span class="asterik">*</span> Alamat </label>
                                 <div class="controls">
-                                    <textarea class="span11" name="karyawan_alamat" rows="5"  required="required"></textarea>
+                                    <textarea class="span11" name="karyawan_alamat" rows="2"  required="required"></textarea>
                                 </div>
                             </div>
                             <div class="control-group">
