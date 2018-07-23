@@ -32,11 +32,13 @@ class Perusahaan extends MY_Controller
 		$this->render_page('backend/perusahaan/profil');
 	}
 
+
 	function cabang()
 	{
 		$data['keyword'] = "";
 		$data['perusahaan'] = $this->Mperusahaan->get_perusahaan();
-		$data['jam_kerja'] = $this->Mperusahaan->semua_jamkerja();		
+		$data['jam_kerja'] = $this->Mperusahaan->semua_jamkerja();
+
 		if ($this->input->post('cari')) {
 			$keyword = $this->input->post('cari', TRUE);
 			$data['perusahaan'] = $this->Mperusahaan->cari($keyword);
@@ -44,6 +46,31 @@ class Perusahaan extends MY_Controller
 		}
 
 		$this->render_page('backend/perusahaan/data-cabang',$data);
+	}
+
+	function tampil_jadwal()
+	{
+		// echo $_GET['id'];
+		$jam_kerja=$this->db->query('SELECT * FROM _jam_kerja j, _lokasi l, _perusahaan p WHERE j.lokasi_id=l.lokasi_id and p.perusahaan_id=l.perusahaan_id and l.lokasi_id='.$_GET['id'].'')->result_array();
+
+
+                                                      
+echo ''.$_GET['id'].'';
+print_r($jam_kerja);
+                                                             foreach ($jam_kerja as $key => $j) : 
+                                                              
+                                                                echo '<tr>
+                                                                    <td>'.$j['kerja_hari'].'</td>
+                                                                    <td title="Jam Masuk">'.$j['jam_masuk'].'</td>
+                                                                    <td>-</td>
+                                                                    <td title="Jam Selesai">'.$j['jam_keluar'].'</td>
+
+                                                                </tr>';
+                                                          
+                                                             endforeach ;
+
+
+
 	}
 
 	function editprofil($id)
@@ -107,7 +134,7 @@ class Perusahaan extends MY_Controller
 
 	        $this->Mperusahaan->add_lokasi($input,$image_name);
 	        redirect('mastercms/perusahaan/cabang', 'refresh');
-	    }
+	    } 
 
 	    $center=$this->def_lat.",".$this->def_lng;
 	    $cfg=array(

@@ -37,13 +37,14 @@ class Mperusahaan extends CI_Model
 	function get_perusahaan()
 	{
 		$id = $_SESSION['user']['perusahaan_id'];
-		$this->db->select('l.lokasi_id, l.lokasi_nama,l.perusahaan_title,l.perusahaan_alamat,l.qr_code, count(k.karyawan_id) AS jml_karyawan');
-		$this->db->order_by('l.lokasi_id','desc');
-		$this->db->group_by('l.lokasi_id');
-		$this->db->where('l.perusahaan_id', $id);
-		$this->db->join('_karyawan k', 'l.lokasi_id = k.lokasi_id', 'left');
-		$this->db->join('_perusahaan p', 'p.perusahaan_id = l.lokasi_id', 'left');
-		$data = $this->db->get('_lokasi l');
+		// $this->db->select('l.lokasi_id, l.lokasi_nama,l.perusahaan_title,l.perusahaan_alamat,p.perusahaan_idd as perusahaan_idd, l.qr_code, count(k.karyawan_id) AS jml_karyawan');
+		// $this->db->order_by('l.lokasi_id','desc');
+		// $this->db->group_by('l.lokasi_id');
+		// $this->db->where('l.perusahaan_id', $id);
+		// $this->db->join('_karyawan k', 'l.lokasi_id = k.lokasi_id', 'left');
+		// $this->db->join('_perusahaan p', 'p.perusahaan_id = l.lokasi_id', 'left');
+		// $data = $this->db->get('_lokasi l');
+		$data=$this->db->query('SELECT p.perusahaan_nama, `l`.`lokasi_id`, `l`.`lokasi_nama`, `l`.`perusahaan_title`, `l`.`perusahaan_alamat`, `p`.`perusahaan_id` as `perusahaan_id`, `l`.`qr_code`, count(k.karyawan_id) AS jml_karyawan FROM _lokasi l, _perusahaan p, _karyawan k WHERE l.perusahaan_id=p.perusahaan_id and k.lokasi_id=l.lokasi_id and p.perusahaan_id="'.$id.'" GROUP BY `l`.`lokasi_id` ORDER BY `l`.`lokasi_id` DESC');
 		return $data->result_array();
 	}
 	function tampil_cabang()
