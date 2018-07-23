@@ -246,6 +246,31 @@ function goBack() {
     window.history.back();
 }
 </script>
+<script>
+    function cekemail(){
+        var member = $("#email").val();
+        var pesan = document.getElementById('pesan');
+        // membuat ajax
+        $.ajax({
+            url:'<?php echo base_url("home/cekemail"); ?>',
+            method:'POST',
+            data:'email_member='+member,
+            success:function(hasil)
+            {
+                if(hasil=="gagal")
+                {
+                    pesan.style.color='green';
+                    pesan.innerHTML="email boleh digunakan.";
+                }
+                else
+                {
+                    pesan.style.color='red';
+                    pesan.innerHTML="email tidak boleh digunakan";
+                }
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
