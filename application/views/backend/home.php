@@ -1,3 +1,4 @@
+
 <div id="content">
     <div id="content-header">
         <div id="breadcrumb"> <a href="#" title="" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> Home</a></div>
@@ -70,11 +71,76 @@
 </div>
 
 </div>
-</div>
+<!-- </div> -->
 
 
         
-    <div class="row-fluid">
+      
+<!-- kawe -->
+    <!-- <div class="row-fluid"> -->
+<?php foreach ($perusahaan as $key => $p) { ?>
+   
+
+<!-- <div class="col-md-2" > -->
+     <div class="span5 jarakspan">
+        <!-- <div class="jarakspan"> -->
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-signal"></i> </span>
+            <h5><?= $p['lokasi_nama']; ?></h5>
+          </div>
+          <div class="widget-content">
+            <div id="container-<?= $p['lokasi_id'];?>" class="pie" style="padding: 0px; position: relative;">
+ 
+
+
+            </div>
+          </div>
+        </div>
+        <!-- </div> -->
+      </div>
+<!-- </div> -->
+            <script>
+                Highcharts.chart('container-<?= $p['lokasi_id'];?>', {
+                  chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Presensi <?= $p['lokasi_nama'];?>'
+                },
+                subtitle: {
+                    text: 'Total Karyawan : <?= $p['jml_karyawan']; ?>'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                      allowPointSelect: true,
+                      cursor: 'pointer',
+                      dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Jumlah',
+                data: <?= (!empty($absen[$p['lokasi_id']])) ? json_encode($absen[$p['lokasi_id']]) : json_encode(array('kosong')) ?>
+            }]  
+        });
+    </script>
+
+
+<?php
+} ?>
+</div>
+
+
+<!-- ori -->
+<!--   <div class="row-fluid">
         <?php foreach ($perusahaan as $key => $p): ?>
             <div class="span6">
                 <div class="widget-box">
@@ -123,7 +189,8 @@
         });
     </script>
 <?php endforeach ?>
-</div>
+</div> -->
 <br>
 <!--REPORT END-->
+</div>
 </div>
