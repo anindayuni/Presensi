@@ -1,123 +1,140 @@
- <!-- page heading start-->
  <div id="content">
   <div id="content-header">
     <div id="breadcrumb">
       <a href="<?php echo base_url('mastercms'); ?>" title="" class="tip-bottom" data-original-title="Go to Home">
         <i class="icon-home"></i> Home
       </a>
-      <a href="<?php echo base_url('mastercms/karyawan'); ?>">Data Karyawan</i>
+      <a href="#" class="current">Data Karyawan</i>
       </a>
     </div>
   </div>
-  <!-- page heading end-->
-  <!-- body wrapper start -->
-  <div class="container-fluid" style="min-height: 450px;">
+  <div class="container-fluid">
     <div class="row-fluid">
       <div class="span12">
-        <div class="col-md-3">
-          <div class="panel">
-            <div class="panel-body">
-              <h5 align="center">Daftar Perusahaan</h5>
-
-              <table class="table">
-                <?php foreach ($perusahaan as $key => $value) : ?>
-                  <tr>
-                    <form class="form-horizontal " role="form" method="post" enctype="multipart/form-data">
-                      <td width="10%"><?php echo $key+1; ?></td>
-                      <td>
-                        <input type="hidden" name="lokasi_id" value="<?php echo $value['lokasi_id']; ?>">      
-                        <div class="btn-group">
-                          <button type="submit" class="btn btn-info" ><?php echo $value['lokasi_nama']; ?></button>
-                        </div>
-                      </td>
-                    </form>
-                  </tr>
-                <?php endforeach ?>
-              </table>
-
+        <form name="filterFrm" method="post">
+          <div class="span2">
+            <div class="controls">
+              <input type="text" name="cari" class="span12" placeholder="Cari Karyawan" />
             </div>
           </div>
-        </div>
+          <div class="span4" style="margin-left: 5px">
+            <div class="controls">
+              <p>
+                <button name="filter" type="submit" class="btn btn-primary"><i class="icon-search"></i> Cari Data</button>
+                <button name="reset" class="btn btn-warning"><i class="icon-repeat"></i> Reset Filter</button>
+              </p>
+            </div>
+          </div>
+        </form>
+        <div class="buttons" align="right"><a href="<?php echo base_url('mastercms/karyawan/tambah'); ?>" class="btn btn-success"><i class="icon-plus" style="color: #fff;"></i> Tambah Karyawan</a></div>
+      </div>
+    </div>
 
-        <div class="col-md-9">
-          <div class="panel">
-            <div class="panel panel-default">
-              <div class="panel-heading">&nbsp; Data Karyawan
-                <div class="label label-success  pull-right"><a style="color: #fff;" href="<?php echo base_url('mastercms/karyawan/add'); ?>" title="Add Karyawan"><i class="fa fa-plus"></i> Add Karyawan</a></div>
+    <div class="row-fluid">
+      <div class="span12">
+        <?php echo $this->session->userdata('msg');?>
+        <div class="accordion" id="collapse-group">
+          <?php foreach ($perusahaan as $key => $value): ?>
+            <div class="accordion-group widget-box">
+              <div class="accordion-heading">
+                <div class="widget-title">
+                  <a data-parent="#collapse-group" href="#collapse-<?= $key; ?>" data-toggle="collapse">
+                    <span class="icon"><i class="icon-folder-open"></i></span><h5><?= $value['lokasi_nama']; ?></h5>
+                  </a>
+                </div>
               </div>
-              <br/>
-              <?php if (!empty($karyawan_id)): ?>
-                <div class="row-fluid" style="padding-left: 8px;">
-                  <div class="span12">
-                    <form name="filterFrm" method="post">
-                      <div class="span2">
-                        <div class="controls">
-                          <input type="hidden" id="lokasi_id" name="lokasi_id" value="<?php echo $lokasi_id; ?>">
-                          <input type="text" name="cari" class="span12" placeholder="Cari Karyawan" />
-                        </div>  
-                      </div>
-                      <div class="span4" style="margin-left: 5px">
-                        <div class="controls">
-                          <p>
-                            <button type="submit" class="btn btn-primary" name="filter" value="1"><i class="fa fa-search"></i>Cari Karyawan</button>
-                            <span><button type="submit" onclick="window.location=<?php echo base_url('mastercms/karyawan/');?>" class="btn btn-warning" name="reset" value="1"><i class="fa fa-rotate-left"></i> Reset</button> </span>
-                          </p>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              <?php endif ?>
-              <div class="panel-body" style="padding-left: 8px; padding-right: 8px">
-                <div id="load_data">
-                  
+              <div class="collapse accordion-body <?php if($key==0) echo "in"; ?>" id="collapse-<?= $key; ?>">
+                <div class="widget-content nopadding">
+                  <!-- <div class="widget-box"> -->
+                    <div class="widget-title">
+                     <span class="icon"><i class="icon-th"></i></span> 
+                     <h5>Karyawan</h5>
+                   </div>
 
+                    <table class="table table-bordered data-table">
+                      <thead>
+                        <tr>
+                          <th width="3%;">No</th>
+                          <th>Nama Karyawan</th>
+                          <th>Jabatan</th>
+                          <th>Email</th>
+                          <th>No.Telp</th>
+                          <th>Aksi</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php $i = 1; ?>
+                        <?php foreach ($karyawan as $key => $empl): ?>
+                          <?php if ($value['lokasi_id']==$empl['lokasi_id']): ?>
+                            <tr class="gradeX">
+                              <td class="center"><?= $i++; ?></td>
+                              <td><?= $empl['karyawan_nama']; ?></td>
+                              <td><?= $empl['karyawan_jabatan']; ?></td>
+                              <td><?= $empl['karyawan_email']; ?></td>
+                              <td><?php if(!empty($empl['no_hp']))echo $empl['no_hp']; else echo "-"; ?></td>
+                              <td>
+                                <div class="fr">
+                                  <a href="#det-<?=$empl['karyawan_id']; ?>" class="btn btn-info btn-mini">Detail</a> 
+                                  <a href="<?php echo base_url("mastercms/karyawan/edit/$empl[karyawan_id]"); ?>" class="btn btn-warning btn-mini">Edit</a>
+                                  <a href="#del-<?=$empl['karyawan_id']; ?>" class="btn btn-danger btn-mini">Delete</a>
+                                </div>
+                              </td>
+                            </tr>                           
+                          <?php endif ?> 
 
-                </div>
-              
-                </div>
-
-                <div class="center" style="text-align: center">
-                  <div class="pagination alternate" style="text-align: center;">
-                    <ul>
-                      <!-- <?php echo $mpaging ?> -->
-                    </ul>
-                  </div>
-                </div>
-
+                          <!-- Modal Detail -->
+                          <div class="light-modal" id="det-<?=$empl['karyawan_id']; ?>" role="dialog" aria-labelledby="light-modal-label" aria-hidden="false">
+                            <div class="light-modal-content large-content animated zoomInUp">
+                              <div class="light-modal-header">
+                                <h6 class="light-modal-heading"><i class="fa fa-warning"></i> Detail <?= $empl['karyawan_nama']; ?></h6>
+                              </div>
+                              <div class="light-modal-body">
+                                <ul>
+                                  <li>Perusahaan    : </li><p><?= $empl['lokasi_nama']; ?></p>
+                                  <li>Nama Lengkap  : </li><p><?= $empl['karyawan_nama']; ?></p>
+                                  <li>Jabatan       : </li><p><?= $empl['karyawan_jabatan']; ?></p>
+                                  <li>Tanggal Lahir : </li><p><?= date("d M Y", strtotime($empl['karyawan_ttl']));  ?></p>
+                                  <li>Email         : </li><p><?= $empl['karyawan_email']; ?></p>
+                                  <li>No. Telp      : </li><p><?php if(!empty($empl['no_hp'])) echo $empl['no_hp']; else echo "-"; ?></p>
+                                  <li>Alamat        : </li><p><?= $empl['karyawan_alamat']; ?></p>
+                                </ul>
+                              </div>
+                              <div class="light-modal-footer">
+                                <a href="<?php echo base_url("mastercms/karyawan/edit/$empl[karyawan_id]"); ?>" class="btn btn-warning" aria-label="edit">Edit</a>&nbsp;&nbsp;&nbsp;
+                                <a href="#" class="btn btn-info" aria-label="close">Tutup</a>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Modal End -->
+                          
+                          <!-- Modal Delete -->
+                          <div class="light-modal" id="del-<?=$empl['karyawan_id']; ?>" role="dialog" aria-labelledby="light-modal-label" aria-hidden="false">
+                            <div class="light-modal-content  animated zoomInUp">
+                              <div class="light-modal-header">
+                                <h6 class="light-modal-heading"><i class="icon-warning"></i> Hapus Data</h6>
+                              </div>
+                              <div class="light-modal-body">
+                                Yakin ingin menghapus karyawan '<b><?= $empl['karyawan_nama']; ?> ?</b>'
+                              </div>
+                              <div class="light-modal-footer">
+                                <a href="<?= base_url("mastercms/karyawan/hapus/$empl[karyawan_id]"); ?>" class="btn btn-danger" aria-label="close">Ya</a>&nbsp;&nbsp;&nbsp;
+                                <a href="#" class="btn btn-info" aria-label="close">Tidak</a>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Modal End -->
+                        <?php endforeach ?>                
+                      </tbody>
+                    </table>
+                <!-- </div> -->
               </div>
             </div>
           </div>
+        <?php endforeach ?> 
 
-        </div>
       </div>
     </div>
   </div>
+
 </div>
-<!-- Body wrapper End -->
-
 </div> <!-- penutup id="content" -->
-
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    load_data();
-    function load_data(page){
-      var lokasi_id = $('#lokasi_id').val();
-      $.ajax({
-        url: '<?php echo base_url('mastercms/karyawan/pagination') ?>',
-        method: 'GET',
-        data: 'page='+page+'&lokasi_id='+lokasi_id,
-        success: function(res){
-          $('#load_data').html(res);
-        }
-      });
-    }
-
-    $(document).on('click', '.pagination', function(){
-      $page = $(this).attr('id');
-      load_data($page);   
-    });
-  });
-</script>
-

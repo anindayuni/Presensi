@@ -1,18 +1,142 @@
- <!-- page heading start-->
  <div id="content">
   <div id="content-header">
     <div id="breadcrumb">
-      <a href="<?php echo base_url('mastercms'); ?>" title="" class="tip-bottom" data-original-title="Go to Home">
-        <i class="icon-home"></i> Home
-      </a>
-      <a href="<?php echo base_url('mastercms/absensi'); ?>">Absensi - Summary</i>
-      </a>
+      <a href="<?php echo base_url('mastercms/home'); ?>" title="" class="tip-bottom" data-original-title="Go to Home"> <i class="icon-home"></i> Home </a>
+      <a href="#" class="current">Summary</i> </a>
     </div>
   </div>
-  <!-- page heading end-->
-
-  <!-- body wrapper start -->
   <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+        form
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="accordion" id="collapse-group">
+            <?php foreach ($cabang as $key => $value): ?>
+            <div class="accordion-group widget-box">
+              <div class="accordion-heading">
+                <div class="widget-title">
+                  <a data-parent="#collapse-group" href="#collapse-<?= $key;?>" data-toggle="collapse">
+                    <span class="icon"><i class="icon-folder-open"></i></span><h5><?php echo $value['lokasi_nama']; ?></h5>
+                  </a>
+
+                </div>
+              </div>
+              <div class="collapse accordion-body <?php if($key==0)echo "in"; ?>" id="collapse-<?= $key;?>">
+                <div class="widget-content nopadding">
+                  <div class="widget-title">
+                    <!-- <span class="icon"><i class="icon-th"></i></span>  -->
+                    <h5>Summary</h5>
+                  </div>
+
+                  <table class="table table-bordered data-table">
+                    <thead>
+                      <tr>
+                        <th width="3%;">No</th>
+                        <th>Nama Karyawan</th>
+                        <th width="10%;">Jml Hari Kerja</th>
+                        <th width="10%;">Masuk</th>
+                        <th width="10%;">Terlambat</th>
+                        <th width="10%;">Sakit</th>
+                        <th width="10%;">Ijin</th>
+                        <th width="10%;">Cuti</th>
+                        <th width="10%;">Absen</th>
+                        <th width="5%;">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php $i=1; if (!empty($karyawan)): ?>
+                          <?php foreach ($karyawan as $key => $kary) : ?>
+                              <?php if ($value['lokasi_id']==$kary['lokasi_id']): ?>
+                                <tr>
+                                  <td><?php echo $i++; ?></td>
+                                  <td><a href="<?php echo base_url('mastercms/absensi/detail/').$kary['karyawan_id'].'/'.$bulan; ?>" class="mydetail"><?= $kary['karyawan_nama']; ?></a></td>
+                                  <td><?php echo $jml_hari_kerja; ?></td>
+                                  <td>
+                                    <?php
+                                    foreach ($kehadiran as $key => $kehad) :
+                                      if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="masuk kerja")
+                                        { echo $kehad['jumlah']; }
+                                    endforeach;
+                                    ?>
+                                  </td>
+                                  <td>
+                                    <?php
+                                    foreach ($kehadiran as $key => $kehad) :
+                                      if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="terlambat")
+                                        {  echo $kehad['jumlah']; }
+                                    endforeach;
+                                    ?>
+                                  </td>
+                                  <td>
+                                    <?php
+                                    foreach ($kehadiran as $key => $kehad) :
+                                      if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="sakit")
+                                        { echo $kehad['jumlah']; }
+                                    endforeach;
+                                    ?>
+                                  </td>
+                                  <td>
+                                    <?php
+                                    foreach ($kehadiran as $key => $kehad) :
+                                      if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="ijin")
+                                        { echo $kehad['jumlah']; }
+                                    endforeach;
+                                    ?>
+                                  </td>
+                                  <td>
+                                    <?php
+                                    foreach ($kehadiran as $key => $kehad) :
+                                      if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="cuti")
+                                        { echo $kehad['jumlah']; }
+                                    endforeach;
+                                    ?>
+                                  </td>
+                                  <td style="color:#ff0000;">
+                                    <?php
+                                    foreach ($presensi as $key => $pres) :
+                                      if ($pres['karyawan_id'] == $kary['karyawan_id'])
+                                      {
+                                        $tot_presensi = $pres['jumlah'];
+                                        $absen = $jml_hari_kerja - $tot_presensi;
+                                        echo $absen;
+                                      }
+                                    endforeach;
+                                    ?>
+                                  </td>
+                                  <td>
+                                    <div class="fr"><a href="<?php echo base_url('mastercms/absensi/detail/').$kary['karyawan_id'].'/'.$bulan; ?>" class="btn btn-info btn-mini">Detail</a></div>
+                                  </td>
+                                </tr>
+                              <?php endif ?>
+                            
+                          <?php endforeach; ?>
+                        <?php elseif (empty($lokasi_id)): ?> <!-- Jika belum memilih perusahaan -->
+                        <!-- <div class="alert alert-error alert-block" style="margin-right: 10px;margin-left: 10px;margin-top: 15px">
+                          <a class="close" data-dismiss="alert" href="#">×</a>
+                          <strong>Silahkan Pilih Perusahaan Anda</strong> Untuk Melihat Laporan Presensi Karyawan
+                        </div> -->
+
+                        <?php else: ?> <!-- Jika perusahaan yang dipilih belum memiliki data karyawan -->
+                        <div class="alert alert-error alert-block" style="margin-right: 10px;margin-left: 10px;margin-top: 15px">
+                          <a class="close" data-dismiss="alert" href="#">×</a>
+                          Perusahaan anda <strong>belum memasukkan data karyawan</strong>, Silahkan masukkan data karyawan Anda
+                        </div>
+                      <?php endif ?>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+            <?php endforeach ?> 
+             
+          </div>
+      </div>
+    </div>
+
     <div class="row-fluid">
       <div class="span12">
         <div class="container-fluid">
@@ -144,6 +268,7 @@
                           </tr>
                         <?php endif ?>
 
+
                         <?php if (!empty($karyawan)): ?>
                           <?php foreach ($karyawan as $key => $kary) : ?>
                               <tr>
@@ -154,9 +279,7 @@
                                   <?php
                                   foreach ($kehadiran as $key => $kehad) :
                                     if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="masuk kerja")
-                                    {
-                                      echo $kehad['jumlah'];
-                                    }
+                                    { echo $kehad['jumlah']; }
                                   endforeach;
                                   ?>
                                 </td>
@@ -164,9 +287,7 @@
                                   <?php
                                   foreach ($kehadiran as $key => $kehad) :
                                     if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="terlambat")
-                                    {
-                                      echo $kehad['jumlah'];
-                                    }
+                                    {  echo $kehad['jumlah']; }
                                   endforeach;
                                   ?>
                                 </td>
@@ -174,9 +295,7 @@
                                   <?php
                                   foreach ($kehadiran as $key => $kehad) :
                                     if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="sakit")
-                                    {
-                                  echo $kehad['jumlah'];
-                                    }
+                                    { echo $kehad['jumlah']; }
                                   endforeach;
                                   ?>
                                 </td>
@@ -184,9 +303,7 @@
                                   <?php
                                   foreach ($kehadiran as $key => $kehad) :
                                     if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="ijin")
-                                    {
-                                 echo $kehad['jumlah'];
-                                    }
+                                    { echo $kehad['jumlah']; }
                                   endforeach;
                                   ?>
                                 </td>
@@ -194,9 +311,7 @@
                                   <?php
                                   foreach ($kehadiran as $key => $kehad) :
                                     if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="cuti")
-                                    {
-                                      echo $kehad['jumlah'];
-                                    }
+                                    { echo $kehad['jumlah']; }
                                   endforeach;
                                   ?>
                                 </td>
@@ -212,7 +327,8 @@
                                     endforeach;
                                   ?>
                                 </td>
-                                <td align="center">
+                                <td>
+                                  
                                   <a href="<?php echo base_url('mastercms/absensi/detail/').$kary['karyawan_id'].'/'.$bulan; ?>">
                                     <center><span class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Detail</span></center>
                                   </a>

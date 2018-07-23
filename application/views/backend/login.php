@@ -17,7 +17,7 @@
         <form class="form-signin" action="" method="post">
             <div class="form-signin-heading text-center">
                 <!-- <img src="<?php echo base_url('assets/backend/images/login-logo.png');?>" alt=""/> -->
-                <h3 style="color: #000; font-weight: bold;">LOGIN ABSENSI</h3>
+                <h3 style="color: #000; font-weight: bold;">LOGIN PRESENSI</h3>
             </div>
             <div class="login-wrap">
                 <?php echo $this->session->userdata('msg'); unset($_SESSION); ?>

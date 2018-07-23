@@ -28,10 +28,12 @@
 	<div id="top"></div>
 	<!-- /.parallax full screen background image -->
 	<div class="fullscreen landing parallax" style="background-image:url('<?= base_url('assets/frontend/images/empy.jpg'); ?>');" data-img-width="2000" data-img-height="1333" data-diff="100">
-
-			<!-- <div class="pull-right" style="border: 1px solid #fff; margin-top: 15px; padding: 5px 10px 5px 10px; color: #fff;">Login</div> -->
 		<div class="overlay">
 			<div class="container">
+				<div class="head-login wow fadeInRight" align="right">
+					<a href="<?= base_url('mastercms'); ?>" class="btn-login" target="_blank">Login</a>
+				</div>
+
 				<div class="row">
 					<div class="col-md-7">
 
@@ -49,11 +51,11 @@
 								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 								consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-								cillum dolore eu fugiat nulla pariatur. </p>
+							cillum dolore eu fugiat nulla pariatur. </p>
 						</div>
 
 						<!-- /.header button -->
-						<!-- <div class="head-btn wow fadeInLeft">
+					<!-- 	<div class="head-btn wow fadeInLeft">
 							<a href="#feature" class="btn-primary">Features</a>
 							<a href="#download" class="btn-default">Download</a>
 						</div> -->
@@ -68,52 +70,52 @@
 								<?php echo $this->session->flashdata('msg'); ?>
 								<?php if (!empty($failed)): ?>
 									<div class="alert alert-danger" role="alert"><?php echo $failed; ?></div>
-									<?php endif ?>
-									<div class="form-group">
-										<input class="form-control input-lg" name="perusahaan_nama" id="name" type="text" placeholder="Nama Perusahaan" required>
-									</div>
-									<div class="form-group">
-										<input class="form-control input-lg" name="perusahaan_email" type="email" placeholder="Email Perusahaan" required>
-									</div>
-									<div class="form-group">
-										<input class="form-control input-lg" name="perusahaan_password" type="password" placeholder="Password" required>	
-									</div>
-									<div class="form-group">
-										<input class="form-control input-lg" name="perusahaan_bidang" type="text" placeholder="Bidang Perusahaan" required>
-									</div>
-									<div class="form-group last">
-										<button type="submit" class="btn btn-success btn-lg">Daftar</button>
-									</div>
-									<p class="privacy text-center">Sudah punya akun? Login <a href="<?= base_url('mastercms'); ?>">disini</a></p>
-								</form>
-							</div>
-
+								<?php endif ?>
+								<div class="form-group">
+									<input class="form-control input-lg" name="perusahaan_nama" id="name" type="text" placeholder="Nama Perusahaan" required>
+								</div>
+								<div class="form-group">
+									<input class="form-control input-lg" name="perusahaan_email" type="email" placeholder="Email Perusahaan" required>
+								</div>
+								<div class="form-group">
+									<input class="form-control input-lg" name="perusahaan_password" type="password" placeholder="Password" required>	
+								</div>
+								<div class="form-group">
+									<input class="form-control input-lg" name="perusahaan_bidang" type="text" placeholder="Bidang Perusahaan" required>
+								</div>
+								<div class="form-group last">
+									<button type="submit" class="btn btn-success btn-lg" style="text-transform: uppercase;">Daftar Gratis</button>
+								</div>
+								<p class="privacy text-center">Sudah punya akun? Login <a href="<?= base_url('mastercms'); ?>" target="_blank">disini</a></p>
+							</form>
 						</div>
+
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<!-- modal -->
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Modal Header</h4>
-					</div>
-					<div class="modal-body">
-						<p>This is a small modal.</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
+	<!-- modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Modal Header</h4>
+				</div>
+				<div class="modal-body">
+					<p>This is a small modal.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
-		<!-- modal -->
+	</div>
+	<!-- modal -->
 
-		<!-- NAVIGATION -->
+	<!-- NAVIGATION -->
 
 
 	<!-- <div id="menu">
@@ -313,16 +315,14 @@
 
 							<!-- /.address and contact -->
 							<div class="col-lg-5 contact-left wow fadeInUp">
-								<h2><span class="highlight">Get</span> in touch</h2>
+								<h2><span class="highlight">Hubungi</span> Kami</h2>
 								<ul class="ul-address">
-									<li><i class="pe-7s-map-marker"></i>1600 Amphitheatre Parkway, Mountain View</br>
-										California 55000
+									<li><i class="pe-7s-map-marker"></i>Tugu Asri B7, Sariharjo, Ngaglik, Sleman, Yogyakarta 55581
 									</li>
-									<li><i class="pe-7s-phone"></i>+1 (123) 456-7890</br>
-										+2 (123) 456-7890
+									<li><i class="pe-7s-phone"></i>0822-8999-5700
 									</li>
-									<li><i class="pe-7s-mail"></i><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
-									<li><i class="pe-7s-look"></i><a href="#">www.yoursite.com</a></li>
+									<!-- <li><i class="pe-7s-mail"></i><a href="mailto:info@yoursite.com">info@yoursite.com</a></li> -->
+									<li><i class="pe-7s-look"></i><a href="#">www.otret.com</a></li>
 								</ul>
 
 							</div>
@@ -331,13 +331,13 @@
 							<div class="col-lg-7 contact-right">
 								<form method="POST" id="contact-form" class="form-horizontal" action="contactengine.php" onSubmit="alert( 'Thank you for your feedback!' );">
 									<div class="form-group">
-										<input type="text" name="Name" id="Name" class="form-control wow fadeInUp" placeholder="Name" required/>
+										<input type="text" name="Name" id="Name" class="form-control wow fadeInUp" placeholder="Nama" required/>
 									</div>
 									<div class="form-group">
 										<input type="text" name="Email" id="Email" class="form-control wow fadeInUp" placeholder="Email" required/>
 									</div>
 									<div class="form-group">
-										<textarea name="Message" rows="20" cols="20" id="Message" class="form-control input-message wow fadeInUp" placeholder="Message" required></textarea>
+										<textarea name="Message" rows="20" cols="20" id="Message" class="form-control input-message wow fadeInUp" placeholder="Pesan" required></textarea>
 									</div>
 									<div class="form-group">
 										<input type="submit" name="submit" value="Submit" class="btn btn-success wow fadeInUp" />

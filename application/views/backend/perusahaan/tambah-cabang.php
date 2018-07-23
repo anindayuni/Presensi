@@ -1,35 +1,22 @@
-<!-- page Content Start-->
 <?php echo $map['js']; ?>
 <div id="content">
-    <!--Breadcrumb Start-->
     <div id="content-header">
         <div id="breadcrumb">
-            <a href="#" title="" class="tip-bottom" data-original-title="Go to Home">
-                <i class="icon-home"></i> Home
-            </a>
-            <a href="<?php echo base_url('mastercms/karyawan'); ?>">Content
-            </a>
-            <a href="#" class="current"></i>Add
-            </a>
+            <a href="#" title="" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> Home </a>
+            <a href="<?php echo base_url('mastercms/perusahaan'); ?>">Perusahaan </a>
+            <a href="#" class="current"></i> Tambah Perusahaan </a>
         </div>
     </div>
-    <!--Breadcrumb End-->
-
     <!--Container Fluid start-->
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">
                 <div class="widget-box">
-                    <!--page header start-->
                     <div class="widget-title" style="margin-bottom: 15px">
-                        <span class="icon">
-                            <i class="fa fa-plus"></i>
-                        </span>
-                        <h5>
-                            Tambah Lokasi / Perusahaan / Cabang
-                        </h5>
+                        <span class="icon"> <i class="icon-plus"></i></span>
+                        <h5> Tambah Perusahaan </h5>
+                        <div class="buttons"><button onclick="goBack()" class="btn btn-mini btn-default"></i> Kembali </button></div>
                     </div>
-                    <!--page header end-->
                     <!--Add content start-->
                     <div class="widget-content nopadding">
                         <form class="form-horizontal " role="form" action="" method="post" enctype="multipart/form-data">
@@ -37,7 +24,7 @@
                                 <div class="span12">
                                     <div class="widget-content">
                                         <div class="control-group">
-                                            <label class="control-label"><span class="asterik">*</span> Nama Lokasi / Perusahaan</label>
+                                            <label class="control-label"><span class="asterik">*</span> Nama Perusahaan</label>
                                             <div class="controls">
                                                 <input class="span12" type="text" name='lokasi_nama' minlength="5" required="required">
                                             </div>
@@ -81,10 +68,10 @@
                                             </div>
                                         </div>
                                         <div class="control-group form-action">
-                                            <label class="span2 span2" ><code>(*) wajib diisi.</code></label>
-                                            <div class="span8">
-                                                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Simpan</button> &nbsp;
-                                                <a href="" class="btn btn-danger"><i class="fa fa-undo"></i> Batal</a>
+                                            <label class="control-label" ><code>(*) wajib diisi.</code></label>
+                                            <div class="span8"><br/>
+                                                <button type="submit" class="btn btn-success"><i class="icon-check"></i> Simpan</button> &nbsp;
+                                                <button onclick="goBack()" class="btn btn-danger"><i class="icon-remove"></i> Batal</button><br/>
                                             </div>
                                         </div>
                                     </div>

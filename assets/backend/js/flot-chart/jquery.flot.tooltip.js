@@ -249,11 +249,11 @@
     };
 
     // define Flot plugin
-    $.plot.plugins.push({
-        init: init,
-        options: defaultOptions,
-        name: 'tooltip',
-        version: '0.6.1'
-    });
+    // $.plot.plugins.push({
+    //     init: init,
+    //     options: defaultOptions,
+    //     name: 'tooltip',
+    //     version: '0.6.1'
+    // });
 
 })(jQuery);

@@ -1,36 +1,22 @@
-<!-- page Content Start-->
 <?php echo $map['js']; ?>
 <div id="content">
-    <!--Breadcrumb Start-->
     <div id="content-header">
         <div id="breadcrumb">
-            <a href="#" title="" class="tip-bottom" data-original-title="Go to Home">
-                <i class="icon-home"></i> Home
-            </a>
-            <a href="<?php echo base_url('mastercms/perusahaan'); ?>">Content
-            </a>
-            <a href="<?php echo base_url('master/perusahaan/edit') ?>" class="current"></i><?= $title; ?>
-            </a>
+            <a href="#" title="" class="tip-bottom" data-original-title="Go to Home"> <i class="icon-home"></i> Home </a>
+            <a href="<?php echo base_url('mastercms/perusahaan/cabang'); ?>">Perusahaan </a>
+            <a href="#" class="current"></i>Edit Perusahaan </a>
         </div>
     </div>
-    <!--Breadcrumb End-->
-
     <!--Container Fluid start-->
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">
                 <div class="widget-box">
-                    <!--page header start-->
                     <div class="widget-title" style="margin-bottom: 15px">
-                        <span class="icon">
-                            <i class="fa fa-plus"></i>
-                        </span>
-                        <h5>
-                            Edit Lokasi / Perusahaan / Cabang
-                        </h5>
+                        <span class="icon"><i class="icon-plus"></i></span>
+                        <h5> Edit Lokasi / Perusahaan / Cabang </h5>
+                        <div class="buttons"><button onclick="goBack()" class="btn btn-mini btn-default"></i> Kembali </button></div>
                     </div>
-                    <!--page header end-->
-
                     <!--Add content start-->
                     <div class="widget-content nopadding">
                         <form class="form-horizontal " role="form" action="" method="post" enctype="multipart/form-data">

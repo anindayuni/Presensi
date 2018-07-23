@@ -12,14 +12,22 @@ class Mabsensi extends CI_Model
 		$ambil = $this->db->get('_absensi');
 		return $ambil->result_array();
 	}
-
+	public function get_presensi_by_month()
+	{
+		$perusahaan_id	= $_SESSION['user']['perusahaan_id'];
+		$this->db->where('_lokasi.perusahaan_id', $perusahaan_id);
+		$this->db->join('_karyawan', '_karyawan.karyawan_id = _absensi.karyawan_id');
+		$this->db->join('_lokasi', '_lokasi.lokasi_id = _karyawan.lokasi_id');
+		$this->db->order_by('_absensi.tanggal', 'DESC');
+		$ambil = $this->db->get('_absensi');
+		return $ambil->result_array();
+	}
 	public function get_cabang(){
 		$perusahaan_id	= $_SESSION['user']['perusahaan_id'];
 		$this->db->where('perusahaan_id',$perusahaan_id);
 		$data = $this->db->get('_lokasi');
 		return $data;
 	}
-
 	public function get_karyawan($id){
 		$hasil=$this->db->query("SELECT * FROM _karyawan WHERE lokasi_id='$id'");
 		return $hasil->result();
@@ -81,15 +89,6 @@ class Mabsensi extends CI_Model
 		$this->db->where('karyawan_id', $id);
 		$this->db->delete('_absensi');
 	}
-
-	// public function cari($keyword){
-	// 	$this->db->like('karyawan_nama', $keyword); //mencari data yang serupa dengan keyword
-	// 	$this->db->join('_lokasi', '_karyawan.lokasi_id = _lokasi.lokasi_id');
-	// 	$this->db->join('_absensi', '_karyawan.karyawan_id = _absensi.karyawan_id');
-	// 	$ambil = $this->db->get('_karyawan');
-	// 	return $ambil->result_array();
-	// }
-	
 	public function detail_absensi($id, $bulan){
 		$this->db->join('_lokasi', '_karyawan.lokasi_id = _lokasi.lokasi_id');
 		$this->db->join('_absensi', '_karyawan.karyawan_id = _absensi.karyawan_id');
@@ -104,8 +103,21 @@ class Mabsensi extends CI_Model
 	public function semua_cabang($id){
 		$this->db->where('_perusahaan.perusahaan_id', $id);
 		$this->db->join('_perusahaan', '_perusahaan.perusahaan_id = _lokasi.perusahaan_id');
-		$this->db->order_by('lokasi_id', 'DESC');
+		// $this->db->order_by('lokasi_id', 'DESC');
 		$ambil = $this->db->get('_lokasi');
+		return $ambil->result_array();
+	}
+	// yuni edit
+	function get_karyawan_by_lokasi()
+	{
+		$id = $_SESSION['user']['perusahaan_id'];
+		// echo "<pre>";
+		// print_r($id );
+		// echo "</pre>";
+		// $this->db->where('_karyawan.lokasi_id', $lokasi_id);
+		$this->db->where('_lokasi.perusahaan_id', $id);
+		$this->db->join('_lokasi', '_lokasi.lokasi_id = _karyawan.lokasi_id');
+		$ambil = $this->db->get('_karyawan');
 		return $ambil->result_array();
 	}
 
@@ -125,6 +137,18 @@ class Mabsensi extends CI_Model
 		$ambil = $this->db->get();
 		return $ambil->result_array();
 	} //Jml kehadiran karyawan berdasarkan statusnya (masuk, terlambat, ijin atau sakit) dan bulan tahun
+
+	// yuni
+	public function jumlah_hari_kerja($bulan, $tahun){
+		$hari_kerja = $this->db->query("SELECT DISTINCT _absensi.tanggal as JML FROM _absensi
+						JOIN _karyawan ON _karyawan.karyawan_id = _absensi.karyawan_id
+						JOIN _lokasi ON _lokasi.lokasi_id = _karyawan.lokasi_id
+						WHERE MONTH(_absensi.tanggal) = $bulan AND YEAR(_absensi.tanggal) = $tahun");
+		
+		$ambil = $hari_kerja->num_rows();
+		return $ambil;
+	}
+	// yuni end
 
 	public function jml_hari_kerja($lokasi_id, $bulan, $tahun){
 		$hari_kerja = $this->db->query("SELECT DISTINCT _absensi.tanggal as JML FROM _absensi

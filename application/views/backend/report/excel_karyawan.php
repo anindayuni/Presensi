@@ -14,17 +14,19 @@ header("Expires: 0");
 			<th>Jam Masuk</th>
 			<th>Jam Keluar</th>
 			<th>Status</th>
+			<th>Keterangan</th>
 		</tr>
 	</thead>
 	<tbody>
 		<?php $i=1; foreach($user as $user) { ?>
 			<tr>
-				<td><?php echo $i; ?></td>
-				<td><?php echo hari($user->tanggal).', '.tanggal($user->tanggal); ?></td>
-				<td><?php echo $user->karyawan_nama ?></td>
-				<td><?php echo $user->jam_masuk_absen ?></td>
-				<td><?php echo $user->jam_keluar_absen ?></td>
-				<td><?php echo $user->status ?></td>
+				<td><?= $i; ?></td>
+				<td><?= hari($user->tanggal).', '.tanggal($user->tanggal); ?></td>
+				<td><?= $user->karyawan_nama ?></td>
+				<td><?= $user->jam_masuk_absen ?></td>
+				<td><?= $user->jam_keluar_absen ?></td>
+				<td><?= $user->status ?></td>
+				<td><?php if (!empty($user->keteragan)) echo $user->keterangan; else echo "-"; ?></td>
 			</tr>
 		<?php $i++; } ?>
 	</tbody>

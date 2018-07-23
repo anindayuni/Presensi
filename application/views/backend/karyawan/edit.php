@@ -1,6 +1,4 @@
-<!-- page Content Start-->
 <div id="content">
-    <!--Breadcrumb Start-->
     <div id="content-header">
         <div id="breadcrumb">
             <a href="#" title="" class="tip-bottom" data-original-title="Go to Home">
@@ -12,25 +10,15 @@
             </a>
         </div>
     </div>
-    <!--Breadcrumb End-->
-
     <!--Container Fluid start-->
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">
                 <div class="widget-box">
-                    <!--page header start-->
                     <div class="widget-title" style="margin-bottom: 15px">
-                        <span class="icon">
-                            <i class="fa fa-plus"></i>
-                        </span>
-                        <h5>
-                            Edit Data Karyawan
-                        </h5>
+                        <span class="icon"><i class="icon-edit"></i></span>
+                        <h5>Edit Data Karyawan</h5>
                     </div>
-                    <!--page header end-->
-
-                    <!--Add content start-->
                     <div class="widget-content nopadding">
                         <form class="form-horizontal " role="form" method="post" enctype="multipart/form-data" name="tambah_karyawan">
                             <div class="row-fluid">
@@ -47,10 +35,10 @@
                                             <div class="controls">
                                                 <select name="lokasi_id" class="span11">
                                                    <?php if (empty($karyawan)): ?>
-                                                    <option value=""><?php echo "Tidak ada perusahaan yang dimasukkan"; ?></option>
+                                                    <option value=""><?php echo "Data perusahaan kosong."; ?></option>
                                                     <?php else: ?>
                                                         <?php foreach ($karyawan as $key => $value) :?>
-                                                            <option value="<?php echo $value['lokasi_id'] ?>"><?php echo $value['lokasi_nama']; ?></option>
+                                                            <option <?php if($edit['lokasi_id']==$value['lokasi_id']) echo "selected"; ?> value="<?php echo $value['lokasi_id'] ?>" ><?php echo $value['lokasi_nama']; ?></option>
                                                         <?php endforeach ?>
                                                     <?php endif ?>
                                                 </select>
@@ -66,7 +54,7 @@
                                     <div class="control-group">
                                         <label class="control-label"><span class="asterik"></span> Tanggal Lahir </label>
                                         <div class="controls">
-                                            <div class="col-sm-5 input-group date" id="tgl" style="margin-top:-5px;">
+                                            <div class="span11 input-group date" id="tgl" style="margin-top:-5px;">
                                                 <input type="date" name="karyawan_ttl" class="span12" size="16" value="<?php echo $edit['karyawan_ttl']; ?>">
                                                               <!--   <span class="input-group-btn">
                                                                     <button type="button" class="btn btn-primary date-reset"><i class="fa fa-times"></i></button>
@@ -82,7 +70,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label"><span class="asterik"></span> No HP </label>
+                                                        <label class="control-label"><span class="asterik"></span> No.Telp </label>
                                                         <div class="controls">
                                                             <input type="text" name="no_hp" value="<?php echo $edit['no_hp']; ?>" class="span11" value="<?php echo $edit['no_hp']; ?>">
                                                         </div>
@@ -90,7 +78,7 @@
                                                     <div class="control-group">
                                                         <label class="control-label"><span class="asterik">*</span> Alamat </label>
                                                         <div class="controls">
-                                                            <textarea class="form-control" name="karyawan_alamat"  rows="5" required="required"><?php echo $edit['karyawan_alamat']; ?></textarea>
+                                                            <textarea class="form-control span11" name="karyawan_alamat"  rows="5" required="required"><?php echo $edit['karyawan_alamat']; ?></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="control-group">

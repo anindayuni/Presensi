@@ -9,7 +9,6 @@ class Perusahaan extends MY_Controller
 	{
 		parent::__construct();
 		date_default_timezone_set('Asia/Jakarta');
-		$this->load->model('Mperusahaan');
 		$this->load->helper(array('form','url'));
 		// Load Config Map
 		$this->load->config('map');
@@ -23,54 +22,21 @@ class Perusahaan extends MY_Controller
 		if (!$this->session->userdata('user'))
 		{
 			$log = base_url("mastercms");
-			$this->session->set_flashdata('msg', '<div class="alert alert-block alert-info fade in"><button type="button" class="close close-sm" data-dismiss="alert"><i class="fa fa-times"></i></button><i class="fa fa-warning"></i>&nbsp;&nbsp;Anda harus login terlebih dahulu.</div>');
+			$this->session->set_flashdata('msg', '<div class="alert alert-block alert-info fade in"><button type="button" class="close close-sm" data-dismiss="alert"><i class="icon-remove"></i></button><i class="fa fa-warning"></i>&nbsp;&nbsp;Anda harus login terlebih dahulu.</div>');
 			echo "<script>location='$log';</script>";
 		}
 	}
 
 	function index()
 	{
-		$id = $_SESSION['user']['perusahaan_id'];
-		$data['profil'] = $this->Mperusahaan->profil($id);
-		$this->render_page('backend/perusahaan/profil',$data);
+		$this->render_page('backend/perusahaan/profil');
 	}
 
 	function cabang()
 	{
 		$data['keyword'] = "";
-		$perusahaan = $this->Mperusahaan->get_perusahaan();
-		$data['jam_kerja'] = $this->Mperusahaan->semua_jamkerja();
-		// Pagination
-		$config['base_url'] = base_url('mastercms/perusahaan/cabang/');
-		$config['total_rows'] = count($perusahaan);
-		$config['per_page'] = 5;
-		// pull left
-		$config['full_tag_open'] = '<li>';
-		$config['full_tag_close'] = '</li>';
-		$config['cur_tag_open'] = '<li class="active"><a>';
-		$config['cur_tag_close'] = '</a></li>';
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['first_link'] = "First";
-		$config['first_tag_open'] = "<li>";
-		$config['first_tag_close'] = "</li>";
-		$config['prev_link'] = "Prev";
-		$config['prev_tag_open'] = "<li>";
-		$config['prev_tag_close'] = "</li>";
-		// pull right
-		$config['next_link'] = "Next";
-		$config['next_tag_open'] = "<li>";
-		$config['next_tag_close'] = "</li>";
-		$config['last_link'] = "Last";
-		$config['last_tag_open'] = "<li>";
-		$config['last_tag_close'] = "</li>";
-
-		$this->pagination->initialize($config);
-		$from = $this->uri->segment(4);
-
-		$data['perusahaan'] = $this->Mperusahaan->get_perusahaan_pagination($config['per_page'], $from);
-		$data['mpaging'] = $this->pagination->create_links();
-		
+		$data['perusahaan'] = $this->Mperusahaan->get_perusahaan();
+		$data['jam_kerja'] = $this->Mperusahaan->semua_jamkerja();		
 		if ($this->input->post('cari')) {
 			$keyword = $this->input->post('cari', TRUE);
 			$data['perusahaan'] = $this->Mperusahaan->cari($keyword);
@@ -88,7 +54,8 @@ class Perusahaan extends MY_Controller
 		if ($this->input->post()) {
 			$input = $this->input->post();
 			$this->Mperusahaan->edit_profil($id, $input);
-			redirect('mastercms/perusahaan', 'refresh');
+			$this->session->set_flashdata('msg', '<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button><strong>Sukses!</strong> Data berhasil diubah.</div>');
+			redirect('mastercms/home', 'refresh');
 		}
 		$this->render_page('backend/perusahaan/edit-profil', $data);
 	}

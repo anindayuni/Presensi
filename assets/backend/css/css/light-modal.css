@@ -23,7 +23,8 @@
 }
 
 .light-modal-content {
-  background: #ffffff;
+  background: #F9F9F9;
+  /*background: #ffffff;*/
   color: #000000;
   width: 30vw;
   border-radius: .2em;
@@ -69,6 +70,19 @@
   padding: 20px;
   overflow: auto;
   max-height: 450px;
+}
+.light-modal-body ul
+{
+  list-style: none;
+}
+.light-modal-body ul li
+{
+  line-height: 1em;
+  font-weight: bold;
+}
+.light-modal-body ul p
+{
+ line-height: 1.3em;
 }
 
 .light-modal-footer {

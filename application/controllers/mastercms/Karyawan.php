@@ -6,105 +6,92 @@ class Karyawan extends MY_Controller
 		parent::__construct();
     $this->load->model('Mkaryawan');
     $this->load->model('Mperusahaan');
-    if (!$this->session->userdata('user'))
+    if (!$this->session->userdata('user')) {
+       $log = base_url("mastercms");
+       $this->session->set_flashdata('msg', '<div class="alert alert-block alert-info fade in"><button type="button" class="close close-sm" data-dismiss="alert"><i class="icon-remove"></i></button><i class="icon-warning"></i>&nbsp;&nbsp;Anda harus login terlebih dahulu.</div>');
+       echo "<script>location='$log';</script>";			
+    }
+  }
+  function index()
+  { 
+    $id = $_SESSION['user']['perusahaan_id'];
+    $data['session']=$id;
+    $data['perusahaan'] = $this->Mperusahaan->get_cabang($id);
+    $data['karyawan'] = $this->Mkaryawan->tampil($id);
+
+    // if ($this->input->post('cari')) {
+      
+    // }
+
+    if ($this->input->post('filter'))
     {
-     $log = base_url("mastercms");
-     $this->session->set_flashdata('msg', '<div class="alert alert-block alert-info fade in"><button type="button" class="close close-sm" data-dismiss="alert"><i class="fa fa-times"></i></button><i class="fa fa-warning"></i>&nbsp;&nbsp;Anda harus login terlebih dahulu.</div>');
-     echo "<script>location='$log';</script>";			
-   }
- }
+      echo "<pre>";
+      print_r($this->input->post('cari'));
+      echo "</pre>";
+      // $keyword = $this->input->post('cari');
+      // $data['karyawan_id'] = $this->Mkaryawan->cari($keyword);
+    }
+    // if($this->input->post('reset') == "1")
+    // {
+    //   redirect('mastercms/karyawan','refreh');
+    // }
+    $this->render_page('backend/karyawan/tampil', $data);
+  }
 
 
+public function data()
+{
+  // DB table to use
+$table = '_karyawan';
  
- function index()
- { 
-  $id = $_SESSION['user']['perusahaan_id'];
-  $data['session']=$id;
-  $data['perusahaan'] = $this->Mperusahaan->get_cabang($id);
-  // $data['perusahaan'] = $this->db->query('SELECT * FROM `_lokasi` WHERE perusahaan_id = "'.$id.'"')->result_array();
-      // $dataKaryawan = $this->Mkaryawan->tampil($id);
-  $data['karyawan'] = $this->Mkaryawan->tampil($id);
-  $data['lokasi_id'] = "";
+// Table's primary key
+$primaryKey = 'karyawan_id';
+ 
+// Array of database columns which should be read and sent back to DataTables.
+// The `db` parameter represents the column name in the database, while the `dt`
+// parameter represents the DataTables column identifier. In this case simple
+// indexes
+$columns = array(
+    array( 'db' => 'lokasi_id', 'dt' => 0 ),
+    array( 'db' => 'karyawan_nama',  'dt' => 1 ),
+    array( 'db' => 'karyawan_jabatan',   'dt' => 2 ),
+    array( 'db' => 'karyawan_user',     'dt' => 3 )
+    // ,
+    // array(
+    //     'db'        => 'start_date',
+    //     'dt'        => 4,
+    //     'formatter' => function( $d, $row ) {
+    //         return date( 'jS M y', strtotime($d));
+    //     }
+    // ),
+    // array(
+    //     'db'        => 'salary',
+    //     'dt'        => 5,
+    //     'formatter' => function( $d, $row ) {
+    //         return '$'.number_format($d);
+    //     }
+    // )
+);
+ 
+// SQL server connection information
+$sql_details = array(
+    'user' => 'root',
+    'pass' => '',
+    'db'   => 'absensi',
+    'host' => 'localhost'
+);
+ 
+ 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * If you just want to use the basic configuration for DataTables with PHP
+ * server-side, there is no need to edit below this line.
+ */
+ 
 
-      // if ($this->input->post()) {
-  $lokasi_id  = $this->input->post('lokasi_id');
-  $data['lokasi_id'] = $lokasi_id;
-        // $data['karyawan_id'] = $this->Mkaryawan->tampil_id($id, $lokasi_id);
-        // $data['karyawan_id'] = $this->Mkaryawan->tampil_id($id, $lokasi_id);
-        // $config['base_url'] = base_url("mastercms/karyawan/");
-        // $config['total_rows'] = count($karyawanId);
-        // $config['full_tag_open'] = '<li>';
-        // $config['full_tag_close'] = '</li>';
-        // $config['cur_tag_open'] = '<li class="active"><a>';
-        // $config['cur_tag_close'] = '</a></li>';
-        // $config['num_tag_open'] = '<li>';
-        // $config['num_tag_close'] = '</li>';
-        // $config['first_link'] = "First";
-        // $config['first_tag_open'] = "<li>";
-        // $config['first_tag_close'] = "</li>";
-        // $config['prev_link'] = "Prev";
-        // $config['prev_tag_open'] = "<li>";
-        // $config['prev_tag_close'] = "</li>";
-        // // pull right
-        // $config['next_link'] = "Next";
-        // $config['next_tag_open'] = "<li>";
-        // $config['next_tag_close'] = "</li>";
-        // $config['last_link'] = "Last";
-        // $config['last_tag_open'] = "<li>";
-        // $config['last_tag_close'] = "</li>";
+echo json_encode(
+    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns )
+);
 
-        // $this->pagination->initialize($config);
-        // $from = $this->uri->segment(3);
-
-        // $data['karyawan_id'] = $this->Mkaryawan->show_karyawan_id_pagination($config['per_page'], $from);
-        // $data['mpaging'] = $this->paginat  ion->create_links(); 
-
-//edited
-
-// library
-  $this->load->library('pagination');
-
-// buat paging
-  $config['base_url'] = base_url("mastercms/karyawan/index/");
-  $config['total_rows'] =  $this->db->query('SELECT * FROM _karyawan k, _lokasi l where k.lokasi_id=l.lokasi_id and k.lokasi_id="'.$lokasi_id.'"')->num_rows();
-  $config['per_page'] = 2;
-  $config['num_links'] = 2;
-// buat css
-
-
-
-//buat nyari
-  $config['first_link']='< First ';
-  $config['last_link']='Last > ';
-  $config['next_link']='> ';
-  $config['prev_link']='< ';
-
-  $from = $this->uri->segment(4);
-  $this->pagination->initialize($config);   
-  $data['karyawan_id'] =$this->Mkaryawan->show_karyawan_id_pagination($config['per_page'], $from, $lokasi_id);
-  $data['mpaging']= $this->pagination->create_links();
-          // $data['total_rows']=$total_rows;
-
-// buat oret2
-
-  $data['lokasi']=$lokasi_id;
-  $data['coba']=$this->uri->segment(5);
-  $data['num_rows']=$this->db->query('SELECT * FROM _karyawan k, _lokasi l where k.lokasi_id=l.lokasi_id and k.lokasi_id="'.$this->input->post('lokasi_id').'"')->num_rows();
-
-      // }
-  if ($this->input->post('filter') == "1")
-  {
-    $keyword = $this->input->post('cari');
-    $data['karyawan_id'] = $this->Mkaryawan->cari($keyword);
-  }
-  if($this->input->post('reset') == "1")
-  {
-    $lokasi_id  = $this->input->post('lokasi_id');
-    $data['lokasi_id'] = $lokasi_id;
-    $data['karyawan_id'] = $this->Mkaryawan->tampil_id($id, $lokasi_id);
-  }
-
-  $this->render_page('backend/karyawan/tampil', $data);
 }
 
 
@@ -306,7 +293,7 @@ $no=1;
 }
 
 
-function add()
+function tambah()
 {
   if ($this->input->post())
   {
@@ -315,17 +302,11 @@ function add()
     $this->Mkaryawan->sendEmail($receiver);
     $this->Mkaryawan->tambah($input);
     
-    $this->session->set_flashdata('msg', '<div class="alert alert-info">Karyawan berhasil ditambahkan, Email telah dikirimkan ke karyawan baru.</div>');
+    $this->session->set_flashdata('msg', '<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button><strong>Sukses!</strong> Data berhasil ditambahkan.</div>');
   }
 
   $data['karyawan'] = $this->Mkaryawan->daftar_perusahaan();
   $this->render_page('backend/karyawan/tambah', $data);
-}
-
-function detail($karyawan_id)
-{
-  $data['detail_data']= $this->Mkaryawan->detail($karyawan_id);
-  $this->render_page('backend/karyawan/detail', $data);
 }
 
 function edit($karyawan_id)
@@ -335,17 +316,18 @@ function edit($karyawan_id)
 
   if ($this->input->post())
   {
-   $input = $this->input->post();
-   $this->Mkaryawan->edit($input, $karyawan_id);
- }
+    $input = $this->input->post();
+    $this->Mkaryawan->edit($input, $karyawan_id);
+    $this->session->set_flashdata('msg', '<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button><strong>Sukses!</strong> Data berhasil diubah.</div>');
+  }
  $this->render_page('backend/karyawan/edit',$data);
 }
 
 function hapus($karyawan_id)
 {
   $data = $this->Mkaryawan->get_by_id($karyawan_id);
-
   $this->Mkaryawan->hapus($karyawan_id);
+  $this->session->set_flashdata('msg', '<div class="alert alert-danger"><button class="close" data-dismiss="alert">×</button><strong>Sukses!</strong> Data berhasil dihapus.</div>');
   redirect("mastercms/karyawan", "refresh");
 }
 
