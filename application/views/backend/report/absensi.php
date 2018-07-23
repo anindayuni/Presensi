@@ -109,41 +109,48 @@
                                     <td><?php if(!empty($value['keterangan'])) echo strtolower($value['keterangan']); else echo "-";; ?></td>
                                 </tr>
                             <?php endforeach ?>
-
                             <?php elseif(empty($karyawan)): ?>
-                            <table class="table table-bordered data-table">
-                                <thead>
-                                    <tr>
-                                        <th width="10px">No</th>
-                                        <th width="15%">Hari, Tanggal</th>
-                                        <th>Nama Karyawan</th>
-                                        <th>Perusahaan</th>
-                                        <th width="10%">Masuk Presensi</th>
-                                        <th width="10%">Keluar Presensi</th>
-                                        <th width="10%">Status</th>
-                                        <th width="10%">Keterangan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($data_presensi as $key => $data): ?>
-                                        <tr class="gradeX">
-                                            <td><?= $key+1 ; ?></td>
-                                            <td><?= hari($data['tanggal']).', '.tanggal($data['tanggal']); ?></td>
-                                            <td><strong><?= $data['karyawan_nama']; ?></strong></td>
-                                            <td><?= $data['lokasi_nama']; ?></td>
-                                            <td><?= $data['jam_masuk_absen']; ?></td>
-                                            <td><?= $data['jam_keluar_absen']; ?></td>
-                                            <td><?= strtolower($data['status']); ?></td>
-                                            <td><?php if(!empty($data['keterangan'])) echo strtolower($data['keterangan']); else echo "-";; ?></td>
+
+                                <?php if (!empty($data_presensi)): ?>
+                                <table class="table table-bordered data-table">
+                                    <thead>
+                                        <tr>
+                                            <th width="10px">No</th>
+                                            <th width="15%">Hari, Tanggal</th>
+                                            <th>Nama Karyawan</th>
+                                            <th>Perusahaan</th>
+                                            <th width="10%">Masuk Presensi</th>
+                                            <th width="10%">Keluar Presensi</th>
+                                            <th width="10%">Status</th>
+                                            <th width="10%">Keterangan</th>
                                         </tr>
-                                    <?php endforeach ?>
-                                </tbody>
-                             </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($data_presensi as $key => $data): ?>
+                                            <tr class="gradeX">
+                                                <td><?= $key+1 ; ?></td>
+                                                <td><?= hari($data['tanggal']).', '.tanggal($data['tanggal']); ?></td>
+                                                <td><strong><?= $data['karyawan_nama']; ?></strong></td>
+                                                <td><?= $data['lokasi_nama']; ?></td>
+                                                <td><?= $data['jam_masuk_absen']; ?></td>
+                                                <td><?= $data['jam_keluar_absen']; ?></td>
+                                                <td><?= strtolower($data['status']); ?></td>
+                                                <td><?php if(!empty($data['keterangan'])) echo strtolower($data['keterangan']); else echo "-";; ?></td>
+                                            </tr>
+                                        <?php endforeach ?>
+                                    </tbody>
+                                </table>
+                                <?php else: ?>
+                                    <div class="alert alert-info">
+                                        <button class="close" data-dismiss="alert">×</button>
+                                        <strong>Info!</strong> Tidak ada karyawan yang presensi hari ini.
+                                    </div>
+                                <?php endif ?><!-- if (!empty($data_presensi)) end-->
 
                             <?php else: ?>
                                 <div class="alert alert-info">
                                     <button class="close" data-dismiss="alert">×</button>
-                                    <strong>Info!</strong> Karyawan <strong><?= $karyawan; ?></strong> belum presensi bulan di <strong><?= $month; ?>
+                                    <strong>Info!</strong> Karyawan <u><?= $karyawan; ?></u> belum presensi bulan di <u><?= $month; ?></u>
                                 </div>
                             </tbody>
                             <?php endif ?>

@@ -1,10 +1,32 @@
 <?php 
-header("Content-type: application/octet-stream");
-header("Content-Disposition: attachment; filename=$title.xls");
-header("Pragma: no-cache");
-header("Expires: 0");
+// header("Content-type: application/octet-stream");
+// header("Content-Disposition: attachment; filename=$title.xls");
+// header("Pragma: no-cache");
+// header("Expires: 0");
 ?>
 
+<style type="text/css">
+   
+</style>
+
+<table border="1" width="100%">
+	<tbody>
+		<tr>
+			<td colspan="7"><h4>Laporan Presensi Karyawan Bulan <?= bulan($bulan)." ".$tahun; ?></h4></td>
+		</tr>
+		<tr>
+			<td style="font-weight: bold;" colspan="2">Nama Karyawan</td>
+			<td>:</td>
+			<td colspan="4"><?= $karyawan; ?></td>
+		</tr>
+		<tr>
+			<td style="font-weight: bold;" colspan="2">Karyawan Perusahaan</td>
+			<td>:</td>
+			<td colspan="4"><?= $lokasi_nama['lokasi_nama']; ?></td>
+		</tr>
+	</tbody>
+</table>
+<br/>
 <table border="1" width="100%">
 	<thead>
 		<tr style="background-color: #e1e1e1;">

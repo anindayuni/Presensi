@@ -16,9 +16,9 @@ class Absensi extends MY_Controller
     public function index(){
         $data['absensi']    = "";
         $data['lokasi']     = "";
-        $data['bulan']     = "";
+        $data['bulan']     = date('m');
         $data['data']       = $this->Mabsensi->get_cabang();
-        $data['data_presensi'] = $this->Mabsensi->get_presensi_by_month();
+        $data['data_presensi'] = $this->Mabsensi->get_presensi_by_day();
         $this->render_page('backend/report/absensi',$data);
     }
     public function get_karyawan(){
@@ -178,7 +178,8 @@ class Absensi extends MY_Controller
     function export_excel_karyawan($lokasi,$bulan,$tahun,$karyawan){
         $nama = str_replace("%20", " ", $karyawan); 
         $data = array( 'title' => $karyawan.' - Laporan Presensi Karyawan',
-            'lokasi_by_id' => $this->Mabsensi->lokasi_by_id($lokasi),
+            'lokasi_nama' => $this->Mabsensi->lokasi_nama($lokasi),
+            'karyawan' => $karyawan,
             'bulan' => $bulan,
             'tahun' => $tahun,
             'user' => $this->Mabsensi->absensi_perorangan($lokasi,$bulan,$tahun,$nama));
