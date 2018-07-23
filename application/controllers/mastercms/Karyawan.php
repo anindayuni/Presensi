@@ -87,9 +87,8 @@ class Karyawan extends MY_Controller
   }
   function tampil_detail()
   {
-    // echo $_GET['id'];
-    $detail = $this->db->query('SELECT * FROM _jam_kerja j, _lokasi l, _perusahaan p WHERE j.lokasi_id=l.lokasi_id and p.perusahaan_id=l.perusahaan_id and l.lokasi_id='.$_GET['id'].'')->result_array();
-    foreach ($jam_kerja as $key => $j) : 
+    $detail = $this->db->query('SELECT * FROM _karyawan WHERE j.lokasi_id=l.lokasi_id and p.perusahaan_id=l.perusahaan_id and l.lokasi_id='.$_GET['id'].'')->result_array();
+    foreach ($detail as $key => $j) : 
       echo '<tr>
       <td>'.$j['kerja_hari'].'</td>
       <td title="Jam Masuk">'.$j['jam_masuk'].'</td>
