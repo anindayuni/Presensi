@@ -37,7 +37,7 @@ class Mabsensi extends CI_Model
 		return $data;
 	}
 	public function get_karyawan($id){
-		$hasil=$this->db->query("SELECT * FROM _karyawan WHERE lokasi_id='$id'");
+		$hasil = $this->db->query("SELECT * FROM _karyawan WHERE lokasi_id='$id'");
 		return $hasil->result();
 	}
 

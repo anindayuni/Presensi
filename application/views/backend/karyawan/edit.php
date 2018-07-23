@@ -1,13 +1,9 @@
 <div id="content">
     <div id="content-header">
         <div id="breadcrumb">
-            <a href="#" title="" class="tip-bottom" data-original-title="Go to Home">
-                <i class="icon-home"></i> Home
-            </a>
-            <a href="<?php echo base_url('mastercms/karyawan'); ?>">Karyawan
-            </a>
-            <a href="#" class="current"></i>Edit
-            </a>
+            <a href="<?= base_url('mastercms/home'); ?>" title="Home" class="tip-bottom" data-original-title="Go to Home"> <i class="icon-home"></i> Home </a>
+            <a href="<?php echo base_url('mastercms/karyawan'); ?>">Karyawan </a>
+            <a href="#" class="current"></i> Edit Data Karyawan </a>
         </div>
     </div>
     <!--Container Fluid start-->
@@ -18,6 +14,7 @@
                     <div class="widget-title" style="margin-bottom: 15px">
                         <span class="icon"><i class="icon-edit"></i></span>
                         <h5>Edit Data Karyawan</h5>
+                        <div class="buttons"><button onclick="goBack()" class="btn btn-mini btn-default"></i> Kembali </button></div>
                     </div>
                     <div class="widget-content nopadding">
                         <form class="form-horizontal " role="form" method="post" enctype="multipart/form-data" name="tambah_karyawan">
@@ -48,14 +45,14 @@
                                     <div class="control-group">
                                         <label class="control-label"><span class="asterik">*</span> Jabatan </label>
                                         <div class="controls">
-                                            <input type="text" name="karyawan_jabatan" class="span11" value="<?php echo $edit['karyawan_jabatan']; ?>" required="required">
+                                            <input type="text" name="karyawan_jabatan" class="span3" value="<?php echo $edit['karyawan_jabatan']; ?>" required="required">
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label"><span class="asterik"></span> Tanggal Lahir </label>
                                         <div class="controls">
                                             <div class="span11 input-group date" id="tgl" style="margin-top:-5px;">
-                                                <input type="date" name="karyawan_ttl" class="span12" size="16" value="<?php echo $edit['karyawan_ttl']; ?>">
+                                                <input type="date" name="karyawan_ttl" class="span3" value="<?php echo $edit['karyawan_ttl']; ?>">
                                                               <!--   <span class="input-group-btn">
                                                                     <button type="button" class="btn btn-primary date-reset"><i class="fa fa-times"></i></button>
                                                                     <button type="button" class="btn btn-primary date-set"><i class="fa fa-calendar"></i></button>
@@ -66,7 +63,7 @@
                                                     <div class="control-group">
                                                         <label class="control-label"><span class="asterik">*</span> Email </label>
                                                         <div class="controls">
-                                                            <input type="email" name="karyawan_email" value="<?php echo $edit['karyawan_email']; ?>" class="span11" value="" required="required">
+                                                            <input type="email" name="karyawan_email" value="<?php echo $edit['karyawan_email']; ?>" class="span3" value="" required="required">
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
@@ -87,11 +84,11 @@
                                                             <input type="text" name="karyawan_salary" value="<?php echo $edit['karyawan_salary']; ?>" class="span11" value="">
                                                         </div>
                                                     </div>
-                                                    <div class="control-group form-action">
+                                                    <div class="control-group form-action"><br/>
                                                         <label class="span2 span2" ><code>(*) Wajib diisi.</code></label>
                                                         <div class="span8">
-                                                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Simpan</button> &nbsp;
-                                                            <a href="<?php echo base_url('mastercms/karyawan'); ?>" class="btn btn-danger"><i class="fa fa-undo"></i> Batal</a>
+                                                            <button type="submit" class="btn btn-success"><i class="icon-check"></i> Simpan</button> &nbsp;
+                                                            <a href="<?php echo base_url('mastercms/karyawan'); ?>" class="btn btn-danger"><i class="icon-remove"></i> Batal</a>
                                                         </div>
                                                     </div>
                                                 </div>
