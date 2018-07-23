@@ -53,66 +53,84 @@ class Perusahaan extends MY_Controller
 		// echo $_GET['id'];
 		$jam_kerja=$this->db->query('SELECT * FROM _jam_kerja j, _lokasi l, _perusahaan p WHERE j.lokasi_id=l.lokasi_id and p.perusahaan_id=l.perusahaan_id and l.lokasi_id='.$_GET['id'].'')->result_array();
 
-
-                                                      
-echo ''.$_GET['id'].'';
-print_r($jam_kerja);
-                                                             foreach ($jam_kerja as $key => $j) : 
-                                                              
-                                                                echo '<tr>
-                                                                    <td>'.$j['kerja_hari'].'</td>
-                                                                    <td title="Jam Masuk">'.$j['jam_masuk'].'</td>
-                                                                    <td>-</td>
-                                                                    <td title="Jam Selesai">'.$j['jam_keluar'].'</td>
-
-                                                                </tr>';
-                                                          
-                                                             endforeach ;
+		$nama_lokasi=$this->db->query('SELECT * FROM _jam_kerja j, _lokasi l, _perusahaan p WHERE j.lokasi_id=l.lokasi_id and p.perusahaan_id=l.perusahaan_id and l.lokasi_id='.$_GET['id'].'')->row_array();
 
 
+		if (empty($jam_kerja)) {
+echo 'Data Masih Kosong';                                                      	# code...
+}                 
 
+else{                                     
+// echo ''.$_GET['id'].'';
+// print_r($jam_kerja);
+	echo '<div class="modal-header">';
+		echo'<button data-dismiss="modal" class="close" type="button">×</button>
+		<h3>'.$nama_lokasi['perusahaan_nama'].'</h3>';
+		echo '</div>
+		<div class="modal-body">
+		<table class="table" align="center">';
+	foreach ($jam_kerja as $key => $j) : 
+
+		echo '<tr>
+		<td>'.$j['kerja_hari'].'</td>
+		<td title="Jam Masuk">'.$j['jam_masuk'].'</td>
+		<td>-</td>
+		<td title="Jam Selesai">'.$j['jam_keluar'].'</td>
+
+		</tr>';
+
+	endforeach ;
+
+	echo '     </table>
+</div>
+                                                            <div class="modal-footer"><a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a> 
+
+                                                        </div>';
+
+}
+
+}
+
+function editprofil($id)
+{
+	$data['title'] = 'Edit Profil';
+	$data['profil'] = $this->Mperusahaan->profil($id);
+
+	if ($this->input->post()) {
+		$input = $this->input->post();
+		$this->Mperusahaan->edit_profil($id, $input);
+		$this->session->set_flashdata('msg', '<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button><strong>Sukses!</strong> Data berhasil diubah.</div>');
+		redirect('mastercms/home', 'refresh');
 	}
+	$this->render_page('backend/perusahaan/edit-profil', $data);
+}
 
-	function editprofil($id)
-	{
-		$data['title'] = 'Edit Profil';
-		$data['profil'] = $this->Mperusahaan->profil($id);
+function detail($id)
+{
+	$data['detail'] = $this->Mperusahaan->get_by_id($id);
+	$data['jamkerja'] = $this->Mperusahaan->get_jamkerja($id);
+	$data['id'] = $id;
+	$this->render_page('backend/perusahaan/detail',$data);
+}
 
-		if ($this->input->post()) {
-			$input = $this->input->post();
-			$this->Mperusahaan->edit_profil($id, $input);
-			$this->session->set_flashdata('msg', '<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button><strong>Sukses!</strong> Data berhasil diubah.</div>');
-			redirect('mastercms/home', 'refresh');
-		}
-		$this->render_page('backend/perusahaan/edit-profil', $data);
-	}
+function add()
+{
+	$this->load->library('ciqrcode');
 
-	function detail($id)
-	{
-		$data['detail'] = $this->Mperusahaan->get_by_id($id);
-		$data['jamkerja'] = $this->Mperusahaan->get_jamkerja($id);
-		$data['id'] = $id;
-		$this->render_page('backend/perusahaan/detail',$data);
-	}
+	if ($this->input->post()) {
+		$input = $this->input->post();
+		$input['perusahaan_id'] = $_SESSION['user']['perusahaan_id'];
+		$input['lokasi_nama'] = $this->input->post('lokasi_nama');
+		$input['perusahaan_alamat'] = $this->input->post('perusahaan_alamat');
 
-	function add()
-	{
-		$this->load->library('ciqrcode');
-
-		if ($this->input->post()) {
-			$input = $this->input->post();
-			$input['perusahaan_id'] = $_SESSION['user']['perusahaan_id'];
-			$input['lokasi_nama'] = $this->input->post('lokasi_nama');
-			$input['perusahaan_alamat'] = $this->input->post('perusahaan_alamat');
-
-			$time	= date("dmyhis");
-			$url 	= strtolower($input['lokasi_nama']);
-			$url 	= str_replace(" ", "-", $url);
-			$url 	= str_replace(".", "-", $url);
-			$url 	= str_replace(",", "-", $url);
-			$url 	= str_replace("(", "-", $url);
-			$url 	= str_replace(")", "-", $url);
-			$alias 	= $url;
+		$time	= date("dmyhis");
+		$url 	= strtolower($input['lokasi_nama']);
+		$url 	= str_replace(" ", "-", $url);
+		$url 	= str_replace(".", "-", $url);
+		$url 	= str_replace(",", "-", $url);
+		$url 	= str_replace("(", "-", $url);
+		$url 	= str_replace(")", "-", $url);
+		$alias 	= $url;
 
 			$config['cacheable']    = true; //boolean, the default is true
 	        $config['cachedir']     = './assets/'; //string, the default is application/cache/
