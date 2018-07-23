@@ -1,7 +1,6 @@
 <?php
 class Login extends CI_Controller
 {
-	
 	function __construct()
 	{
 		parent::__construct();
@@ -47,7 +46,10 @@ class Login extends CI_Controller
 			}
 		}
 		$this->session->sess_destroy();
-		echo "<script>alert('Anda berhasil logout!');location='".base_url("mastercms")."'</script>";
+		$data['data'] = 'logout';
+		// $this->session->set_flashdata('msg', '<div class="alert alert-block alert-danger fade in"><button type="button" class="close close-sm" data-dismiss="alert"><i class="fa fa-times"></i></button>&nbsp;&nbsp;Anda berhasil keluar dari sistem.</div>');
+		redirect('mastercms/login',$data);
+		// echo "location='".base_url("mastercms")."'";
 	}
 
 	function reset_password()

@@ -44,7 +44,6 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/no-data-to-display.js"></script>
-
     <!-- Light Modal -->
     <link rel="stylesheet" href="<?php echo base_url('assets/backend/css/css/light-modal.css');?>" />
 </head>
@@ -61,25 +60,9 @@
                 <li><a class="" title="" href="#ubahPassword" data-toggle="modal">Ubah Password</a></li>
             </ul>
         </li>
-        <li class=""><a href="#logout"><i class="icon-share-alt"></i> <span class="text" style="color: #fff">Keluar</span></a></li>
+        <li class=""><a href="#logout" data-toggle="modal"><i class="icon-share-alt"></i> <span class="text" style="color: #fff">Keluar</span></a></li>
     </ul>
 </div>
-<!-- Modal -->
-<div class="light-modal" id="logout" role="dialog" aria-labelledby="light-modal-label" aria-hidden="false">
-  <div class="light-modal-content  animated zoomInUp">
-    <div class="light-modal-header">
-      <h3 class="light-modal-heading"><i class="fa fa-warning"></i> Keluar</h3>
-  </div>
-  <div class="light-modal-body">
-      Yakin ingin Keluar?
-  </div>
-  <div class="light-modal-footer">
-      <a href="<?php echo base_url('mastercms/login/logout'); ?>" class="btn btn-danger" aria-label="close">Ya</a>&nbsp;&nbsp;&nbsp;
-      <a href="#" class="btn btn-info" aria-label="close">Tidak</a>
-  </div>
-</div>
-</div>
-<!-- end modal -->
 <?php echo $sidebar; ?>
 <?php echo $content; ?>
 <!-- footer -->
@@ -135,9 +118,17 @@
     </div>
     <div class="modal-footer"> <a class="btn btn-warning" href="<?php echo base_url('mastercms/perusahaan/editprofil/').$profil['perusahaan_id']; ?>">Edit</a> <a data-dismiss="modal" class="btn" href="#">Tutup</a> </div>
 </div>
-<!-- modal end -->
 
-<!-- modal ubah password -->
+<div id="logout" class="modal modal-sm hide">
+  <div class="modal-header">
+    <button data-dismiss="modal" class="close" type="button">×</button>
+    <h3>Keluar</h3>
+</div>
+<div class="modal-body">
+    <h5>Yakin ingin keluar ?</h5>
+</div>
+<div class="modal-footer"> <a class="btn btn-danger" href="<?php echo base_url('mastercms/login/logout'); ?>">Ya</a> <a data-dismiss="modal" class="btn" href="#">Tidak</a> </div>
+</div><!-- modal end -->
 <div id="ubahPassword" class="modal hide">
     <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -167,9 +158,7 @@
                 <a data-dismiss="modal" class="btn" href="#">Tutup</a>
             </div>
         </form>
-    </div>
-    <!-- modal end -->
-    
+    </div><!-- modal end -->
     <!--ios7-->
     <script src="<?php echo base_url('assets/backend/js/ios-switch/switchery.js');?>" ></script>
     <script src="<?php echo base_url('assets/backend/js/ios-switch/ios-init.js');?>" ></script>
@@ -195,12 +184,6 @@
     <!--Sparkline Chart-->
     <script src="<?php echo base_url('assets/backend/js/sparkline/jquery.sparkline.js');?>"></script>
     <script src="<?php echo base_url('assets/backend/js/sparkline/sparkline-init.js');?>"></script>
-
-
-    <!--Morris Chart-->
-<!-- <script src="<?php echo base_url('assets/backend/js/morris-chart/morris.js');?>"></script>
-    <script src="<?php echo base_url('assets/backend/js/morris-chart/raphael-min.js');?>"></script> -->
-
     <!--Calendar-->
 <!--<script src="<?php echo base_url();?>/js/calendar/clndr.js"></script>
 <script src="<?php echo base_url();?>/js/calendar/evnt.calendar.init.js"></script>

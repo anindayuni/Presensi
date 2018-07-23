@@ -35,9 +35,8 @@
                 </div>
             </div>
         </form>
-
-            <!-- Modal -->
-            <form action="<?php echo base_url('mastercms/login/reset_password'); ?>" method="post">
+        <!-- Modal -->
+        <form action="<?php echo base_url('mastercms/login/reset_password'); ?>" method="post">
             <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -56,8 +55,8 @@
                     </div>
                 </div>
             </div>
-            </form>
-            <!-- modal -->
+        </form>
+        <!-- modal -->
     </div>
     <?php if ($hasil=='berhasil'): ?>
         <script>
