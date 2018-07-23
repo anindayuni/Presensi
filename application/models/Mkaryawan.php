@@ -8,14 +8,14 @@ class Mkaryawan extends CI_Model
 		$id = $_SESSION['user']['perusahaan_id'];
 		$ambil = $this->db->query("SELECT * FROM _karyawan k 
 				LEFT JOIN _lokasi l ON k.lokasi_id = l.lokasi_id
-				WHERE l.perusahaan_id = '$id' ");
+				WHERE l.perusahaan_id = '$id' ORDER BY k.karyawan_id DESC ");
 		return $ambil->result_array();
 	}
 
 	function tampil_id($id,$lokasi_id)
 	{
 		$id = $_SESSION['user']['perusahaan_id'];
-		$ambil = $this->db->query("SELECT * FROM _karyawann k 
+		$ambil = $this->db->query("SELECT * FROM _karyawan k 
 				RIGHT JOIN _lokasi l ON k.lokasi_id = l.lokasi_id
 				WHERE l.perusahaan_id = '$id' AND k.lokasi_id = '$lokasi_id' ");
 		return $ambil->result_array();

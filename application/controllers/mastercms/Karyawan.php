@@ -70,24 +70,35 @@ class Karyawan extends MY_Controller
     }
    $this->render_page('backend/karyawan/edit',$data);
   }
+  function hapus($karyawan_id)
+  {
+    $data = $this->Mkaryawan->get_by_id($karyawan_id);
+    $this->Mkaryawan->hapus($karyawan_id);
+    $this->session->set_flashdata('msg', '<div class="alert alert-danger"><button class="close" data-dismiss="alert">×</button><strong>Sukses!</strong> Data berhasil dihapus.</div>');
+    redirect("mastercms/karyawan", "refresh");
+  }
+  function hapus_karyawan()
+  {
+    $id=$this->input->get('id');
+    $data = $this->Mkaryawan->get_by_id($id);
 
-function hapus($karyawan_id)
-{
-  $data = $this->Mkaryawan->get_by_id($karyawan_id);
-  $this->Mkaryawan->hapus($karyawan_id);
-  $this->session->set_flashdata('msg', '<div class="alert alert-danger"><button class="close" data-dismiss="alert">×</button><strong>Sukses!</strong> Data berhasil dihapus.</div>');
-  redirect("mastercms/karyawan", "refresh");
-}
+    $this->Mkaryawan->hapus($id);
+    redirect("mastercms/karyawan", "refresh");
+  }
+  function tampil_detail()
+  {
+    // echo $_GET['id'];
+    $detail = $this->db->query('SELECT * FROM _jam_kerja j, _lokasi l, _perusahaan p WHERE j.lokasi_id=l.lokasi_id and p.perusahaan_id=l.perusahaan_id and l.lokasi_id='.$_GET['id'].'')->result_array();
+    foreach ($jam_kerja as $key => $j) : 
+      echo '<tr>
+      <td>'.$j['kerja_hari'].'</td>
+      <td title="Jam Masuk">'.$j['jam_masuk'].'</td>
+      <td>-</td>
+      <td title="Jam Selesai">'.$j['jam_keluar'].'</td>
 
-
-function hapus_karyawan()
-{
-  $id=$this->input->get('id');
-  $data = $this->Mkaryawan->get_by_id($id);
-
-  $this->Mkaryawan->hapus($id);
-  redirect("mastercms/karyawan", "refresh");
-}
+      </tr>';
+    endforeach ;
+  }
 
 }
 ?>

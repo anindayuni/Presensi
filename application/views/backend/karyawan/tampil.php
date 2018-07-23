@@ -46,7 +46,7 @@
                     <div class="widget-content nopadding">
                       <div class="widget-title">
                        <span class="icon"><i class="icon-th"></i></span> 
-                       <h5>Karyawan</h5>
+                       <h5>Data Karyawan</h5>
                      </div>
 
                      <table class="table table-bordered data-table">
@@ -80,13 +80,25 @@
                             </tr>                           
                           <?php endif ?> 
                           <!-- Modal -->
+                          <script type="text/javascript">
+                            function ambil_id<?=$empl['karyawan_id']; ?>() {
+                              var id="<?=$empl['karyawan_id']; ?>";
+                              $.ajax({
+                                url:"<?php echo base_url()?>mastercms/karyawan/tampil_detail",
+                                data:"id="+id,
+                                success: function(res){
+                                  $('#load_data<?=$empl['karyawan_id']; ?>').html(res);
+                                }                                                                       
+                              }); }
+                            </script>
+
                           <div id="detail-<?=$empl['karyawan_id']; ?>" class="modal hide">
                             <div class="modal-header">
                               <button data-dismiss="modal" class="close" type="button">×</button>
                               <h3>Detail <?= $empl['karyawan_nama']; ?></h3>
                             </div>
                             <div class="modal-body">
-                              <!-- <table class="table"></table> -->
+                              <!-- <table></table> -->
                             </div>
                             <div class="modal-footer"> <a class="btn btn-warning" href="<?php echo base_url("mastercms/karyawan/edit/$empl[karyawan_id]"); ?>">Edit</a> <a data-dismiss="modal" class="btn" href="#">Batal</a> </div>
                           </div><!-- Modal Delete -->
@@ -157,13 +169,24 @@
                       </td>
                     </tr>
                     <!-- Modal -->
+                    <script type="text/javascript">
+                      function ambil_id<?= $value['karyawan_id']; ?>() {
+                        var id="<?= $value['karyawan_id']; ?>";
+                        $.ajax({
+                          url:"<?php echo base_url()?>mastercms/karyawan/tampil_jadwal",
+                          data:"id="+id,
+                          success: function(res){
+                            $('#load_data<?= $value['karyawan_id']; ?>').html(res);
+                          }                                                                       
+                        }); }
+                    </script>
                     <div id="detail-<?=$value['karyawan_id']; ?>" class="modal hide">
                       <div class="modal-header">
                         <button data-dismiss="modal" class="close" type="button">×</button>
                         <h3>Detail <?= $value['karyawan_nama']; ?></h3>
                       </div>
                       <div class="modal-body">
-                        <!-- <table class="table"></table> -->
+                        <div id="load_data<?= $p['lokasi_id']; ?>">
                       </div>
                       <div class="modal-footer"> <a class="btn btn-warning" href="<?php echo base_url("mastercms/karyawan/edit/$value[karyawan_id]"); ?>">Edit</a> <a data-dismiss="modal" class="btn" href="#">Batal</a> </div>
                     </div><!-- Modal Delete -->
