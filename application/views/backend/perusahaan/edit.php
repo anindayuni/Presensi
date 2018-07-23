@@ -29,22 +29,20 @@
                                                 <input class="span12" type="text" name='lokasi_nama' minlength="4" required="required" value="<?php echo $data['lokasi_nama']; ?>">
                                             </div>
                                         </div>
+
                                         <div class="control-group">
                                             <label class="control-label"><span class="asterik">*</span> Title</label>
-                                            <div class="controls icheck">
-                                                <div class="square-blue">
-                                                    <div class="radio">
-                                                        <input type="radio" name="perusahaan_title" required="required" value="pusat" <?php if($data['perusahaan_title']=='pusat'){echo "checked";} ?> >
-                                                        <label class="control-label" style="text-align:left; padding:2px 12px 0 0;">Pusat </label>
-                                                    </div>
-                                                    <div class="radio ">
-                                                        <input type="radio" name="perusahaan_title" required="required" value="cabang" <?php if($data['perusahaan_title']=='cabang'){echo "checked";} ?> >
-                                                        <label>Cabang </label>
-                                                    </div>
-                                                </div>
+                                            <div class="controls">
+                                                <label>
+                                                    <input type="radio" name="perusahaan_title" required="required" value="pusat" <?php if($data['perusahaan_title']=='pusat'){echo "checked";} ?> /> Pusat
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="perusahaan_title" required="required" value="cabang" <?php if($data['perusahaan_title']=='cabang'){echo "checked";} ?> /> Cabang
+                                                </label>
                                             </div>
                                         </div>
-                                        <div class="control-group">
+
+                                    <div class="control-group">
                                             <label class="control-label"> <span class="asterik">*</span> Lokasi</label>
                                             <div class="controls">
                                                 <input class="span12" name="perusahaan_alamat" id="pencarian"  type="text" placeholder="Cari Alamat atau Tempat" required="required" onchange="geocodeLokasi()">

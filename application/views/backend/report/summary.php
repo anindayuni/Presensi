@@ -49,7 +49,7 @@
           <div class="span2" style="margin-left: 2px">
             <div class="controls">
               <p>
-                <button type="submit" class="btn btn-primary" name="cari" value="1"><i class="icon-search"></i> Cari Data</button>
+                <button type="submit" class="btn btn-primary" name="cari" value="1" ><i class="icon-search"></i> Cari Data</button>
                 <a href="<?php echo base_url('mastercms/absensi/summary/'); ?>">
                   <button name="reset" type="" class="btn btn-warning" value="1"><i class="icon-repeat"></i> Reset Filter</button>
                 </a>
@@ -57,7 +57,7 @@
             </div>
           </div>
         </form>
-        <!-- <h4 align="right">RINGKASAN PRESENSI BULAN . . .</h4> -->
+       
         <?php if (!empty($lokasi_id)) : ?>
         <div align="right">
           <span class="label label-success" style="margin-bottom: 8px;" align="right"><a style="color: #fff;" href="<?php echo base_url('mastercms/absensi/export_excel/'.$lokasi_id.'/'.$bulan.'/'.$tahun); ?>"><i class="icon-print"></i>  Export to Excel</a></span>
@@ -81,8 +81,6 @@
                   <a data-parent="#collapse-group" href="#collapse-<?= $key;?>" data-toggle="collapse">
                     <span class="icon"><i class="icon-folder-open"></i></span><h5><?php echo $value['lokasi_nama']; ?></h5>
                   </a>
-                  <!-- <span class="label label-success" style="margin-bottom: 8px;" align="right"><a style="color: #fff;" href="<?php echo base_url('mastercms/absensi/export_excel/'.$lokasi_id.'/'.$bulan.'/'.$tahun); ?>"><i class="icon-print"></i>  Export to Excel</a></span> -->
-
                 </div>
               </div>
               <div class="collapse accordion-body <?php if($key==0)echo "in"; ?>" id="collapse-<?= $key;?>">

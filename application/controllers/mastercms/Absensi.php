@@ -80,7 +80,6 @@ class Absensi extends MY_Controller
         }
 
         $this->render_page('backend/report/absensi',$data);
-        // $this->render_page('backend/report/filter_absensi',$data);
     }
     public function summary()
     {
