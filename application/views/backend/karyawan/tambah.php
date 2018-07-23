@@ -12,6 +12,7 @@
         <div class="row-fluid">
             <div class="span12">
                 <?php echo $this->session->userdata('msg');  ?>
+                <?php echo validation_errors(); ?>
                 <div class="widget-box">
                     <div class="widget-title" style="margin-bottom: 15px">
                         <span class="icon"><i class="icon-plus"></i></span>
@@ -49,31 +50,31 @@
                             <div class="control-group">
                                 <label class="control-label"> Tanggal Lahir </label>
                                 <div class="controls">
-                                    <input type="date" name="karyawan_ttl" class="span3" size="16">
+                                    <input type="date" name="karyawan_ttl" class="span3" size="16" value="2000-01-01">
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label"><span class="asterik">*</span> Email </label>
                                 <div class="controls">
-                                    <input type="email" name="karyawan_email" class="span3" value=""  required="required">
+                                    <input type="email" name="karyawan_email" onkeyup="cekemail();return false;" class="span3" value=""  required="required">
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label"> No HP </label>
+                                <label class="control-label"> No. Telp </label>
                                 <div class="controls">
-                                    <input type="number" name="no_hp" class="span3" value="" minlength="10">
+                                    <input type="number" name="no_hp" class="span3" min="0" value="" minlength="10" maxlength="12">
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label"><span class="asterik">*</span> Alamat </label>
                                 <div class="controls">
-                                    <textarea class="span11" name="karyawan_alamat" rows="2"  required="required"></textarea>
+                                    <textarea class="span11" name="karyawan_alamat" rows="2" minlength="20"  required="required"></textarea>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label"> Sallary Karyawan </label>
                                 <div class="controls">
-                                    <input type="text" name="karyawan_salary" class="span11" value="" >
+                                    <input type="number" name="karyawan_salary" class="span11" >
                                 </div>
                             </div>
                             <div class="control-group form-action">

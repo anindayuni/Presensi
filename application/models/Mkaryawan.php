@@ -63,14 +63,20 @@ class Mkaryawan extends CI_Model
 
 	function cari($keyword){
 		$id = $_SESSION['user']['perusahaan_id'];
-		$this->db->like('karyawan_nama', $keyword);
-		$this->db->where('_perusahaan.perusahaan_id', $id);		
+		$this->db->where('_lokasi.perusahaan_id', $id);		
+		$this->db->like('_karyawan.karyawan_nama', $keyword);
 		$this->db->join('_lokasi','_lokasi.lokasi_id = _karyawan.lokasi_id');
-		$this->db->join('_perusahaan','_perusahaan.perusahaan_id = _lokasi.perusahaan_id');
 		$ambil = $this->db->get('_karyawan');
-		return $ambil->result();
+		return $ambil->result_array();
 	}
-
+	function ambil_email($email)
+	{
+		$this->db->select('karyawan_email');
+		$this->db->where('karyawan_email', $email);
+		$ambil = $this->db->get('_karyawan');
+		$data = $ambil->row_array();
+		return $data;
+	}
 	function get_by_id($id)
 	{
 		$this->db->where('karyawan_id', $id);
@@ -114,10 +120,18 @@ class Mkaryawan extends CI_Model
 		$from = "hilo73ch@gmail.com";    //senders email address
         $subject = 'Buat Password Presensi';  //email subject
 
-        $message = '<h3>Selamat Datang Karyawan . . .</h3>
-		<p>Silahkan mengatur password anda untuk dapat menggunakan sistem presensi perusahaan</p>
-		<a href='.base_url().'mastercms/passkaryawan?email='.$receiver.'><button style="background-color:#5187c0;">Setting Password</button></a>';
-        
+        $message = '<p>Hai, <br/><br/>
+        			Selamat datang di Aplikasi Sistem Manajemen Otret Presensi.<br/><br/>
+        			Informasi Anda: <br/>
+        			User Login : '.$receiver.' <br/><br/>
+        			Agar bisa menggunakan aplikasi kami,<br/>
+        			Silahkan mengatur password anda melalui link dibawah ini : </p>
+					<a href='.base_url().'mastercms/passkaryawan?email='.$receiver.'><button>Atur Password</button></a>
+					<br/><br/><br/>
+					Salam Hangat,<br/>
+					SMOP Team <br/>
+					www.otret.com <br/><br/>
+					';
         //config email settings
         $config['protocol'] = 'smtp';
         $config['smtp_host'] = 'ssl://smtp.gmail.com';
