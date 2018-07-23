@@ -131,7 +131,6 @@ class Karyawan extends MY_Controller
             <td>'.$detail['karyawan_alamat'].'</td>
           </tr>
         ';
-
         echo '</table>
         </div><div class="modal-footer"><a data-dismiss="modal" class="btn btn-default" href="#">Tutup</a></div>';
     }

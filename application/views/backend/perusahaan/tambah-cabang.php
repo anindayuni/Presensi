@@ -31,26 +31,43 @@
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label"><span class="asterik">*</span> Title</label>
-                                            <!-- <div class="controls icheck"> -->
-                                                <!-- <div class="square-blue"> -->
-                                                    <div class="controls">
-                                                    <label>
-                                                        <div class="radio" id="uniform-undefined">
-                                                            <span>
-                                                            <input type ="radio" name="perusahaan_title" value="pusat" style="opacity: 0;">
-                                                            </span>
-                                                        </div>
-                                                    Pusat
-                                                    </label>
-                                                    <label>
-                                                        <div class="radio" id="uniform-undefined">
-                                                            <span>
-                                                            <input type="radio" name="perusahaan_title" value="cabang" style="opacity: 0;">
-                                                            </span>
-                                                        </div>
-                                                    Cabang
-                                                    </label>
-                                                    </div>
+
+                                             <div class="controls">
+                                                <label>
+                                                    <input type="radio" name="perusahaan_title" required="required" value="pusat" /> Pusat
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="perusahaan_title" required="required" value="cabang" /> Cabang
+                                                </label>
+                                            </div>
+                                        <!-- <div class="controls icheck"> -->
+                                            <!-- <div class="square-blue"> -->
+                                                   <!--  <div class="controls">
+                                                        <label>
+                                                            <div class="radio" id="uniform-undefined"><span class=""><input type="radio" name="radios" style="opacity: 0;"></span></div>
+                                                        First One</label>
+
+                                                        <label>
+                                                            <div class="radio" id="uniform-undefined"><span class=""><input type="radio" name="radios" style="opacity: 0;"></span></div>
+                                                        Second One</label>
+
+                                                        <label>
+                                                            <div class="radio" id="uniform-undefined">
+                                                                <span>
+                                                                    <input type ="radio" name="perusahaan_title" value="pusat" style="opacity: 0;">
+                                                                </span>
+                                                            </div>
+                                                            Pusat
+                                                        </label>
+                                                        <label>
+                                                            <div class="radio" id="uniform-undefined">
+                                                                <span>
+                                                                    <input type="radio" name="perusahaan_title" value="cabang" style="opacity: 0;">
+                                                                </span>
+                                                            </div>
+                                                            Cabang
+                                                        </label>
+                                                    </div> -->
                                                   <!--   <div class="radio">
                                                         <input type="radio" name="perusahaan_title" value="pusat" required="required">
                                                         <label class="control-label" style="text-align:left; padding:2px 12px 0 0;">Pusat </label>
@@ -59,56 +76,56 @@
                                                         <input type="radio" name="perusahaan_title" value="cabang" required="required">
                                                         <label>Cabang </label>
                                                     </div> -->
-                                                <!-- </div> -->
-                                            <!-- </div> -->
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label"> <span class="asterik">*</span> Lokasi</label>
-                                            <div class="controls">
-                                                <input class="span12" name="perusahaan_alamat" id="pencarian"  type="text" placeholder="Cari Alamat atau Tempat" required="required">
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <div style="width:100%;"><?php echo $map['html'];?></div>
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label"><span class="asterik">*</span> latitude</label>
-                                            <div class="controls">
-                                                <input class="span3" name="latitude" id="lat"  type="text" placeholder="Latitude" readonly="" required="required" value="<?=$lat;?>"/ >
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label"><span class="asterik">*</span> longitude</label>
-                                            <div class="controls">
-                                                <input class="span3" name="longitude" id="lng" type="text" placeholder="Longitudelng" readonly="" required="required" value="<?=$lng;?>"/>
-                                            </div>
-                                        </div>
-                                        <div class="control-group form-action">
-                                            <label class="control-label" ><code>(*) wajib diisi.</code></label>
-                                            <div class="span8"><br/>
-                                                <button type="submit" class="btn btn-success"><i class="icon-check"></i> Simpan</button> &nbsp;
-                                                <button onclick="goBack()" class="btn btn-danger"><i class="icon-remove"></i> Batal</button><br/>
+                                                    <!-- </div> -->
+                                                    <!-- </div> -->
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label"> <span class="asterik">*</span> Lokasi</label>
+                                                    <div class="controls">
+                                                        <input class="span12" name="perusahaan_alamat" id="pencarian"  type="text" placeholder="Cari Alamat atau Tempat" required="required">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <div style="width:100%;"><?php echo $map['html'];?></div>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label"><span class="asterik">*</span> latitude</label>
+                                                    <div class="controls">
+                                                        <input class="span3" name="latitude" id="lat"  type="text" placeholder="Latitude" readonly="" required="required" value="<?=$lat;?>"/ >
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label"><span class="asterik">*</span> longitude</label>
+                                                    <div class="controls">
+                                                        <input class="span3" name="longitude" id="lng" type="text" placeholder="Longitudelng" readonly="" required="required" value="<?=$lng;?>"/>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group form-action">
+                                                    <label class="control-label" ><code>(*) wajib diisi.</code></label>
+                                                    <div class="span8"><br/>
+                                                        <button type="submit" class="btn btn-success"><i class="icon-check"></i> Simpan</button> &nbsp;
+                                                        <button onclick="goBack()" class="btn btn-danger"><i class="icon-remove"></i> Batal</button><br/>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <!-- page end-->
+                                </form>
                             </div>
-                            <!-- page end-->
-                        </form>
+                            <!--Add contetn End-->
+                        </div>
                     </div>
-                    <!--Add contetn End-->
                 </div>
+                <!--Span12 End-->
             </div>
+            <!-- Container fluid END-->
         </div>
-        <!--Span12 End-->
-    </div>
-    <!-- Container fluid END-->
-</div>
 
 
-<script>
+        <script>
 update_address(<?=$lat;?>,<?=$lng;?>); //Set terlebih dahulu alamat lokasi pusat
 function showmap()
 {                       

@@ -88,8 +88,6 @@ class Login extends CI_Controller
 			$update = $this->Mperusahaan->change_password($email, $input);
 
 			if ($update == "berhasil") {
-				// $this->session->set_flashdata('msg', '<div class="alert alert-info">Password Berhasil Diubah</div>');
-				// redirect('mastercms/home');
 				echo "<script>alert('Password Berhasil Diubah');location='".base_url("mastercms/home")."'</script>";
 			}
 		}

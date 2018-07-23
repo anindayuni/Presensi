@@ -25,7 +25,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="buttons" align="right"><a href="<?php echo base_url('mastercms/perusahaan/add'); ?>" class="btn btn-success"><i class="icon-plus" style="color: #fff;"></i> Tambah Perusahaan</a></div>
+                    <div class="buttons" align="right"><a href="<?php echo base_url('mastercms/perusahaan/add'); ?>" class="btn btn-primary"><i class="icon-plus" style="color:#fffff;"></i> Tambah Perusahaan</a></div>
                 </form>
             </div>
         </div>
