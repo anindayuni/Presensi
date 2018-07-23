@@ -28,9 +28,10 @@ class Mperusahaan extends CI_Model
 		return $data;
 	}
 	function cari($keyword){
+		$id = $_SESSION['user']['perusahaan_id'];
 		$data = $this->db->query("SELECT *,count(k.karyawan_id) AS jml_karyawan FROM _lokasi l
 			LEFT JOIN _karyawan k ON l.lokasi_id = k.lokasi_id
-			WHERE lokasi_nama LIKE '%$keyword%' OR perusahaan_alamat LIKE '%$keyword%'
+			WHERE l.perusahaan_id= '".$id."' and lokasi_nama LIKE '%$keyword%' OR perusahaan_alamat LIKE '%$keyword%'
 			GROUP BY l.lokasi_id");
 		return $data->result_array();
 	}

@@ -82,22 +82,14 @@
 
 
                                                       <div id="jadwal-<?= $p['lokasi_id']; ?>" class="modal hide">
-                                                        <div class="modal-header">
-                                                            <button data-dismiss="modal" class="close" type="button">×</button>
-                                                            <h3>Pop up Header </h3>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <table class="table" align="center">
+                                                        
+                                                        
 
                                                                 <div id="load_data<?= $p['lokasi_id']; ?>">
 
                                                                 </div>
 
-                                                            </table>
-                                                            <div class="modal-footer"><a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a> </div>
-
-
-                                                        </div>
+                                                       
 
                                                     </div>
                                                     <!-- end modal jam kerja -->
