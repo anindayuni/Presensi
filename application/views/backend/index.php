@@ -268,10 +268,7 @@
     <script src="<?php echo base_url('assets/backend/js/RobinHerbots-Inputmask/dist/jquery.inputmask.bundle.js');?>"></script> -->
     <!-- <script src="<?php echo base_url('assets/backend/js/tooltip.js');?>"></script> -->
     <script src="<?php echo base_url('assets/backend/js/sweetalert-master/dist/sweetalert-dev.js');?>"></script>
-    <!-- google maps -->
-    <!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&amp;key=AIzaSyD67FGdk2D3otSMETke5rb8i9J6tw7MbdI&callback=initMap"></script> -->
-
-
+ 
     <!-- js yang belum ke load -->
     <!-- <script type="text/javascript" src="<?php echo base_url('assets/backend/js/flot-chart/jquery.flot.tooltip.js');?>"></script> -->
 
