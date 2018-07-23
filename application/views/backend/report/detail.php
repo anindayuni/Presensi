@@ -17,7 +17,14 @@
                         </span>
                         <h5>Detail Karyawan</h5>
                     </div>
+
                     <div class="widget-content nopadding">
+                    <?php if (empty($detail_data)) : ?>
+                        <div class="alert alert-error alert-block" style="margin-right: 10px;margin-left: 10px;margin-top: 15px">
+                          <a class="close" data-dismiss="alert" href="#">×</a>
+                          <strong>Detail presensi karyawan tidak dapat dilihat.</strong> Karyawan ini belum melakukan presensi
+                      </div>
+                    <?php else: ?>
                         <table class="table table-striped">
                             <tbody>
                                 <tr>
@@ -57,6 +64,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                <?php endif; ?>
                     </div>
                 </div>
             </div>
