@@ -174,10 +174,9 @@ class Absensi extends MY_Controller
         $data['bulan'] = $bulan;
         $this->render_page('backend/report/detail', $data);
     }
-
     function export_excel_karyawan($lokasi,$bulan,$tahun,$karyawan){
         $nama = str_replace("%20", " ", $karyawan); 
-        $data = array( 'title' => $karyawan.' - Laporan Presensi Karyawan',
+        $data = array( 'title' => 'Laporan Presensi Karyawan - '.$karyawan,
             'lokasi_nama' => $this->Mabsensi->lokasi_nama($lokasi),
             'karyawan' => $karyawan,
             'bulan' => $bulan,
