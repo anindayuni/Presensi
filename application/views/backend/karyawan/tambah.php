@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label"> Tanggal Lahir </label>
+                                <label class="control-label"><span class="asterik"></span> Tanggal Lahir </label>
                                 <div class="controls">
                                     <input type="date" name="karyawan_ttl" class="span3" size="16" value="2000-01-01">
                                 </div>
