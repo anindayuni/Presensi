@@ -72,7 +72,7 @@
                               <td><?php if(!empty($empl['no_hp']))echo $empl['no_hp']; else echo "-"; ?></td>
                               <td>
                                 <div class="fr">
-                                  <a href="#detail-<?=$empl['karyawan_id']; ?>" data-toggle="modal" class="btn btn-info btn-mini">Detail</a>
+                                  <a href="#detail-<?=$empl['karyawan_id']; ?>" onclick="ambil_id<?= $empl['karyawan_id']; ?>()" class="btn btn-info btn-mini">Detail</a>
                                   <a href="<?php echo base_url("mastercms/karyawan/edit/$empl[karyawan_id]"); ?>" class="btn btn-warning btn-mini">Edit</a>
                                   <a href="#hapus-<?=$empl['karyawan_id']; ?>" data-toggle="modal" class="btn btn-danger btn-mini">Hapus</a>
                                 </div>
@@ -92,17 +92,6 @@
                               }); }
                             </script>
 
-                            <div id="detail-<?=$empl['karyawan_id']; ?>" class="modal hide">
-                              <div class="modal-header">
-                                <button data-dismiss="modal" class="close" type="button">×</button>
-                                <h3>Detail <?= $empl['karyawan_nama']; ?></h3>
-                              </div>
-                              <div class="modal-body">
-                                <div id="load_data<?=$empl['karyawan_id']; ?>">
-                                </div>
-                                <div class="modal-footer"> <a class="btn btn-warning" href="<?php echo base_url("mastercms/karyawan/edit/$empl[karyawan_id]"); ?>">Edit</a> <a data-dismiss="modal" class="btn" href="#">Batal</a> </div>
-                              </div>
-                            </div>
                             <!-- Modal Delete -->
                               <div id="hapus-<?=$empl['karyawan_id']; ?>" class="modal hide">
                                 <div class="modal-header">

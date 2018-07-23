@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <!-- <link rel="shortcut icon" href="<?/*php echo base_url();*/?>/images/favicon.png" type="image/png">-->
+    <!-- <link rel="shortcut icon" href="<?/*php echo base_url();*/?>/images/favicon.png" type="image/png"> -->
     
     <title>SMOP - Sistem Manajemen Otret Presensi</title>
     <!--icheck-->
@@ -53,15 +53,8 @@
   <div id="header">
       <h1><a href="<?= base_url(); ?>">SMOP</a></h1>
   </div>
-    <div id="user-nav" class="navbar navbar-inverse" style="border-color: #47475c;top:-2px;">
+  <div id="user-nav" class="navbar navbar-inverse" style="border-color: #47475c;top:-2px;">
       <ul class="nav">
-        <!-- <li class="dropdown" >
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-user"></i><span class="text" style="color: #fff"> Pengguna</span></a>
-            <ul>
-                <li class="dropdown-menu"><a href="#myProfil" data-toggle="modal">Profil</a></li>
-                <li class="dropdown-menu">Ubah</li>
-            </ul>
-        </li> -->
         <li class="dropdown" ><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-user"></i> <span class="text" style="color: #fff">Pengguna</span> <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li><a class="" title="" href="#myProfil" data-toggle="modal">Profil</a></li>
@@ -69,148 +62,146 @@
             </ul>
         </li>
         <li class=""><a href="#logout"><i class="icon-share-alt"></i> <span class="text" style="color: #fff">Keluar</span></a></li>
-
-
     </ul>
 </div>
-    <!-- Modal -->
-    <div class="light-modal" id="logout" role="dialog" aria-labelledby="light-modal-label" aria-hidden="false">
-      <div class="light-modal-content  animated zoomInUp">
-        <div class="light-modal-header">
-          <h3 class="light-modal-heading"><i class="fa fa-warning"></i> Keluar</h3>
-      </div>
-      <div class="light-modal-body">
-          Yakin ingin Keluar?
-      </div>
-      <div class="light-modal-footer">
-          <a href="<?php echo base_url('mastercms/login/logout'); ?>" class="btn btn-danger" aria-label="close">Ya</a>&nbsp;&nbsp;&nbsp;
-          <a href="#" class="btn btn-info" aria-label="close">Tidak</a>
-      </div>
-    </div>
-    </div>
+<!-- Modal -->
+<div class="light-modal" id="logout" role="dialog" aria-labelledby="light-modal-label" aria-hidden="false">
+  <div class="light-modal-content  animated zoomInUp">
+    <div class="light-modal-header">
+      <h3 class="light-modal-heading"><i class="fa fa-warning"></i> Keluar</h3>
+  </div>
+  <div class="light-modal-body">
+      Yakin ingin Keluar?
+  </div>
+  <div class="light-modal-footer">
+      <a href="<?php echo base_url('mastercms/login/logout'); ?>" class="btn btn-danger" aria-label="close">Ya</a>&nbsp;&nbsp;&nbsp;
+      <a href="#" class="btn btn-info" aria-label="close">Tidak</a>
+  </div>
+</div>
+</div>
 <!-- end modal -->
-        <?php echo $sidebar; ?>
-        <?php echo $content; ?>
-    <!-- footer -->
-    <div class="row-fluid">
-        <div id="footer" style="color: #fff;" class="span12">Sistem Manajemen Otret Presensi &copy; 2018 by <a href="http://otret.com/" target="_blank">PT OTRET.COM</a> </div>
+<?php echo $sidebar; ?>
+<?php echo $content; ?>
+<!-- footer -->
+<div class="row-fluid">
+    <div id="footer" style="color: #fff;" class="span12">Sistem Manajemen Otret Presensi &copy; 2018 by <a href="http://otret.com/" target="_blank">PT OTRET.COM</a> </div>
+</div>
+<!-- modal -->
+<div id="myProfil" class="modal hide">
+    <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3 clas>Profil Pengguna</h3>
     </div>
-    <!-- modal -->
-    <div id="myProfil" class="modal hide">
-        <div class="modal-header">
-            <button data-dismiss="modal" class="close" type="button">×</button>
-            <h3 clas>Profil Pengguna</h3>
-        </div>
-        <div class="modal-body">
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td width="25%">Perusahaan</td>
-                        <td>:</td>
-                        <td><?= $profil['perusahaan_nama']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Status</td>
-                        <td>:</td>
-                        <td><?php if($profil['status']==1) echo "<span class='label label-success'>active</span>";; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Username</td>
-                        <td>:</td>
-                        <td><?= $profil['perusahaan_user']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Email Perusahaan</td>
-                        <td>:</td>
-                        <td><?= $profil['perusahaan_email']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>No.Telepon</td>
-                        <td>:</td>
-                        <td><?= $profil['perusahaan_telp']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Bidang Perusahaan</td>
-                        <td>:</td>
-                        <td><?= $profil['perusahaan_bidang']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Alamat Perusahaan</td>
-                        <td>:</td>
-                        <td><?= $profil['perusahaan_alamat']; ?></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="modal-footer"> <a class="btn btn-warning" href="<?php echo base_url('mastercms/perusahaan/editprofil/').$profil['perusahaan_id']; ?>">Edit</a> <a data-dismiss="modal" class="btn" href="#">Tutup</a> </div>
+    <div class="modal-body">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td width="25%">Perusahaan</td>
+                    <td>:</td>
+                    <td><?= $profil['perusahaan_nama']; ?></td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>:</td>
+                    <td><?php if($profil['status']==1) echo "<span class='label label-success'>active</span>";; ?></td>
+                </tr>
+                <tr>
+                    <td>Username</td>
+                    <td>:</td>
+                    <td><?= $profil['perusahaan_user']; ?></td>
+                </tr>
+                <tr>
+                    <td>Email Perusahaan</td>
+                    <td>:</td>
+                    <td><?= $profil['perusahaan_email']; ?></td>
+                </tr>
+                <tr>
+                    <td>No.Telepon</td>
+                    <td>:</td>
+                    <td><?= $profil['perusahaan_telp']; ?></td>
+                </tr>
+                <tr>
+                    <td>Bidang Perusahaan</td>
+                    <td>:</td>
+                    <td><?= $profil['perusahaan_bidang']; ?></td>
+                </tr>
+                <tr>
+                    <td>Alamat Perusahaan</td>
+                    <td>:</td>
+                    <td><?= $profil['perusahaan_alamat']; ?></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <!-- modal end -->
+    <div class="modal-footer"> <a class="btn btn-warning" href="<?php echo base_url('mastercms/perusahaan/editprofil/').$profil['perusahaan_id']; ?>">Edit</a> <a data-dismiss="modal" class="btn" href="#">Tutup</a> </div>
+</div>
+<!-- modal end -->
 
-    <!-- modal ubah password -->
-    <div id="ubahPassword" class="modal hide">
-        <div class="modal-header">
-            <button data-dismiss="modal" class="close" type="button">×</button>
-            <h3 clas>Ubah Password</h3>
-        </div>
-        <div class="modal-body">
-            <form action="<?php echo base_url('mastercms/login/ubah_password/'); ?>" method="post" class="form-horizontal" name="basic_validate" id="basic_validate" >
+<!-- modal ubah password -->
+<div id="ubahPassword" class="modal hide">
+    <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3 clas>Ubah Password</h3>
+    </div>
+    <div class="modal-body">
+        <form action="<?php echo base_url('mastercms/login/ubah_password/'); ?>" method="post" class="form-horizontal" name="basic_validate" id="basic_validate" >
             <div class="row-fluid">
                 <!-- <div class="span6"> -->
                     <div class="widget-box">
                         <div class="widget-content nopadding">
                             
-                                <div class="control">
-                                    <label class="control-label">Password Baru :</label>
-                                    <div class="controls">
-                                        <input type="password" class="span11" name="password" placeholder="Masukkan Password Baru Anda" required="required" />
-                                    </div>
+                            <div class="control">
+                                <label class="control-label">Password Baru :</label>
+                                <div class="controls">
+                                    <input type="password" class="span11" name="password" placeholder="Masukkan Password Baru Anda" required="required" />
                                 </div>
+                            </div>
                             
                         </div>
                     </div>
-                <!-- </div> -->
+                    <!-- </div> -->
+                </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-warning" type="submit" href="<?php echo base_url('mastercms/login/ubah_password/'); ?>">Ubah</button>
-            <a data-dismiss="modal" class="btn" href="#">Tutup</a>
-        </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" type="submit" href="<?php echo base_url('mastercms/login/ubah_password/'); ?>">Ubah</button>
+                <a data-dismiss="modal" class="btn" href="#">Tutup</a>
+            </div>
         </form>
     </div>
     <!-- modal end -->
     
-<!--ios7-->
-<script src="<?php echo base_url('assets/backend/js/ios-switch/switchery.js');?>" ></script>
-<script src="<?php echo base_url('assets/backend/js/ios-switch/ios-init.js');?>" ></script>
-<!--icheck -->
-<script src="<?php echo base_url('assets/backend/js/iCheck/jquery.icheck.js');?>"></script>
-<script src="<?php echo base_url('assets/backend/js/icheck-init.js');?>"></script>
-<!--pickers plugins-->
-<script type="text/javascript" src="<?php echo base_url('assets/backend/js/bootstrap-datepicker/js/bootstrap-datepicker.js');?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/backend/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js');?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/backend/js/bootstrap-daterangepicker/date.js');?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/backend/js/bootstrap-daterangepicker/moment.min.js');?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/backend/js/bootstrap-daterangepicker/daterangepicker.js');?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/backend/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js');?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/backend/js/bootstrap-timepicker/js/bootstrap-timepicker.js');?>"></script>
+    <!--ios7-->
+    <script src="<?php echo base_url('assets/backend/js/ios-switch/switchery.js');?>" ></script>
+    <script src="<?php echo base_url('assets/backend/js/ios-switch/ios-init.js');?>" ></script>
+    <!--icheck -->
+    <script src="<?php echo base_url('assets/backend/js/iCheck/jquery.icheck.js');?>"></script>
+    <script src="<?php echo base_url('assets/backend/js/icheck-init.js');?>"></script>
+    <!--pickers plugins-->
+    <script type="text/javascript" src="<?php echo base_url('assets/backend/js/bootstrap-datepicker/js/bootstrap-datepicker.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/backend/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/backend/js/bootstrap-daterangepicker/date.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/backend/js/bootstrap-daterangepicker/moment.min.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/backend/js/bootstrap-daterangepicker/daterangepicker.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/backend/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/backend/js/bootstrap-timepicker/js/bootstrap-timepicker.js');?>"></script>
 
-<!--pickers initialization-->
-<script src="<?php echo base_url('assets/backend/js/pickers-init.js');?>"></script>
+    <!--pickers initialization-->
+    <script src="<?php echo base_url('assets/backend/js/pickers-init.js');?>"></script>
 
-<!--easy pie chart-->
-<script src="<?php echo base_url('assets/backend/js/easypiechart/jquery.easypiechart.js');?>"></script>
-<script src="<?php echo base_url('assets/backend/js/easypiechart/easypiechart-init.js');?>"></script>
+    <!--easy pie chart-->
+    <script src="<?php echo base_url('assets/backend/js/easypiechart/jquery.easypiechart.js');?>"></script>
+    <script src="<?php echo base_url('assets/backend/js/easypiechart/easypiechart-init.js');?>"></script>
 
-<!--Sparkline Chart-->
-<script src="<?php echo base_url('assets/backend/js/sparkline/jquery.sparkline.js');?>"></script>
-<script src="<?php echo base_url('assets/backend/js/sparkline/sparkline-init.js');?>"></script>
+    <!--Sparkline Chart-->
+    <script src="<?php echo base_url('assets/backend/js/sparkline/jquery.sparkline.js');?>"></script>
+    <script src="<?php echo base_url('assets/backend/js/sparkline/sparkline-init.js');?>"></script>
 
 
-<!--Morris Chart-->
+    <!--Morris Chart-->
 <!-- <script src="<?php echo base_url('assets/backend/js/morris-chart/morris.js');?>"></script>
-<script src="<?php echo base_url('assets/backend/js/morris-chart/raphael-min.js');?>"></script> -->
+    <script src="<?php echo base_url('assets/backend/js/morris-chart/raphael-min.js');?>"></script> -->
 
-<!--Calendar-->
+    <!--Calendar-->
 <!--<script src="<?php echo base_url();?>/js/calendar/clndr.js"></script>
 <script src="<?php echo base_url();?>/js/calendar/evnt.calendar.init.js"></script>
 <script src="<?php echo base_url();?>/js/calendar/moment-2.2.1.js"></script>
@@ -239,53 +230,36 @@
 
 <!--gritter script-->
 <!-- <script src="<?= base_url('assets/backend/js/gritter/js/jquery.gritter.js');?>"></script>
-<script src="<?= base_url('assets/backend/js/gritter/js/gritter-init.js');?>"></script> -->
-<script src="<?= base_url('assets/backend/js/jquery.maskMoney.js');?>"></script>
+    <script src="<?= base_url('assets/backend/js/gritter/js/gritter-init.js');?>"></script> -->
+    <script src="<?= base_url('assets/backend/js/jquery.maskMoney.js');?>"></script>
 
-<!-- include baru -->
-<script src="<?= base_url('assets/backend/js/js/jquery.min.js') ?>"></script> 
-<script src="<?= base_url('assets/backend/js/js/jquery.ui.custom.js') ?>"></script> 
-<script src="<?= base_url('assets/backend/js/js/bootstrap.min.js') ?>"></script> 
-<script src="<?= base_url('assets/backend/js/js/jquery.dataTables.min.js') ?>"></script> 
-<script src="<?= base_url('assets/backend/js/js/maruti.js') ?>"></script> 
-<script src="<?= base_url('assets/backend/js/js/maruti.tables.js') ?>"></script>
-<script src="<?= base_url('assets/backend/js/js/maruti.popover.js') ?>"></script>
-<script src="<?= base_url('assets/backend/js/js/jquery.gritter.min.js') ?>"></script> 
-<!-- <script src="<?= base_url('assets/backend/js/js/jquery.gritter.min.js') ?>"></script>  -->
-<script src="<?= base_url('assets/backend/js/js/jquery.peity.min.js') ?>"></script>
-<script src="<?= base_url('assets/backend/js/js/maruti.interface.js') ?>"></script> 
-<script src="<?= base_url('assets/backend/js/js/bootstrap-datepicker.js') ?>"></script> 
+    <!-- include baru -->
+    <script src="<?= base_url('assets/backend/js/js/jquery.min.js') ?>"></script> 
+    <script src="<?= base_url('assets/backend/js/js/jquery.ui.custom.js') ?>"></script> 
+    <script src="<?= base_url('assets/backend/js/js/bootstrap.min.js') ?>"></script> 
+    <script src="<?= base_url('assets/backend/js/js/jquery.dataTables.min.js') ?>"></script> 
+    <script src="<?= base_url('assets/backend/js/js/maruti.js') ?>"></script> 
+    <script src="<?= base_url('assets/backend/js/js/maruti.tables.js') ?>"></script>
+    <script src="<?= base_url('assets/backend/js/js/maruti.popover.js') ?>"></script>
+    <script src="<?= base_url('assets/backend/js/js/jquery.gritter.min.js') ?>"></script> 
+    <!-- <script src="<?= base_url('assets/backend/js/js/jquery.gritter.min.js') ?>"></script>  -->
+    <script src="<?= base_url('assets/backend/js/js/jquery.peity.min.js') ?>"></script>
+    <script src="<?= base_url('assets/backend/js/js/maruti.interface.js') ?>"></script> 
+    <script src="<?= base_url('assets/backend/js/js/bootstrap-datepicker.js') ?>"></script> 
 
- <!-- Placed js at the end of the document so the pages load faster -->
- <!--    <script src="<?php echo base_url('assets/backend/js/jquery-1.10.2.min.js');?>"></script>
-    <script src="<?php echo base_url('assets/backend/js/jquery-ui-1.9.2.custom.min.js');?>"></script>
-    <script src="<?php echo base_url('assets/backend/js/jquery-migrate-1.2.1.min.js');?>"></script>
-    <script src="<?php echo base_url('assets/backend/js/modernizr.min.js');?>"></script>
-    <script src="<?php echo base_url('assets/backend/js/jquery.nicescroll.js');?>"></script>
-    <script src="<?php echo base_url('assets/backend/js/fuelux/js/tree.min.js');?>"></script>
-    <script src="<?php echo base_url('assets/backend/js/tree-init.js');?>"></script>
-    <script src="<?php echo base_url('assets/backend/js/bootstrap-fileinput-master/js/fileinput.js');?>"></script>
-    <script src="<?php echo base_url('assets/backend/js/RobinHerbots-Inputmask/dist/jquery.inputmask.bundle.js');?>"></script> -->
-    <!-- <script src="<?php echo base_url('assets/backend/js/tooltip.js');?>"></script> -->
-    <script src="<?php echo base_url('assets/backend/js/sweetalert-master/dist/sweetalert-dev.js');?>"></script>
- 
-    <!-- js yang belum ke load -->
-    <!-- <script type="text/javascript" src="<?php echo base_url('assets/backend/js/flot-chart/jquery.flot.tooltip.js');?>"></script> -->
-
-
-<!--dropzone-->
-<script src="<?php echo base_url('assets/backend/js/dropzone/dropzone.js');?>"></script>
-<!--common scripts for all pages-->
-<script src="<?php echo base_url('assets/backend/js/scripts.js');?>"></script>
-<script>
-function goBack() {
-    window.history.back();
-}
-</script>
-<script>
-    function cekemail(){
-        var member = $("#email").val();
-        var pesan = document.getElementById('pesan');
+    <!--dropzone-->
+    <script src="<?php echo base_url('assets/backend/js/dropzone/dropzone.js');?>"></script>
+    <!--common scripts for all pages-->
+    <script src="<?php echo base_url('assets/backend/js/scripts.js');?>"></script>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    <script>
+        function cekemail(){
+            var member = $("#email").val();
+            var pesan = document.getElementById('pesan');
         // membuat ajax
         $.ajax({
             url:'<?php echo base_url("home/cekemail"); ?>',

@@ -87,16 +87,54 @@ class Karyawan extends MY_Controller
   }
   function tampil_detail()
   {
-    $detail = $this->db->query('SELECT * FROM _karyawan WHERE j.lokasi_id=l.lokasi_id and p.perusahaan_id=l.perusahaan_id and l.lokasi_id='.$_GET['id'].'')->result_array();
-    foreach ($detail as $key => $j) : 
-      echo '<tr>
-      <td>'.$j['kerja_hari'].'</td>
-      <td title="Jam Masuk">'.$j['jam_masuk'].'</td>
-      <td>-</td>
-      <td title="Jam Selesai">'.$j['jam_keluar'].'</td>
+    $detail = $this->db->query('SELECT * FROM _karyawan WHERE karyawan_id='.$_GET['id'].'')->row_array();
+    if (empty($detail)) {
+      echo "Data tidak ditemukan.";
+    }
+    else{
+      // print_r($detail);
+      echo '<div class="modal-header">';
+      echo'<button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Data</h3>';
+        echo '</div>
+        <div class="modal-body">
+        <table class="table table-stripped" align="center">';
+        echo '
+          <tr>
+            <td>Nama Karyawan</td>
+            <td>:</td>
+            <td>'.$detail['karyawan_nama'].'</td>
+          </tr>
+          <tr>
+            <td>Jabatan</td>
+            <td>:</td>a
+            <td>'.$detail['karyawan_jabatan'].'</td>
+          </tr>
+          <tr>
+            <td>Tanggal Lahir</td>
+            <td>:</td>a
+            <td>'.tanggal($detail['karyawan_ttl']).'</td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>:</td>a
+            <td>'.$detail['karyawan_email'].'</td>
+          </tr>
+          <tr>
+            <td>No.Telp</td>
+            <td>:</td>a
+            <td>'.$detail['no_hp'].'</td>
+          </tr>
+          <tr>
+            <td>Alamat</td>
+            <td>:</td>a
+            <td>'.$detail['karyawan_alamat'].'</td>
+          </tr>
+        ';
 
-      </tr>';
-    endforeach ;
+        echo '</table>
+        </div><div class="modal-footer"><a data-dismiss="modal" class="btn btn-default" href="#">Tutup</a></div>';
+    }
   }
 
 }
