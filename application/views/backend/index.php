@@ -53,20 +53,26 @@
   <div id="header">
       <h1><a href="<?= base_url(); ?>">SMOP</a></h1>
   </div>
-<!--Style Button Right-->
-    <!-- <div class="btn-group rightzero">
-      <a class="top_message tip-left" title="" data-original-title="Manage Files"><i class="icon-file"></i></a>
-      <a class="top_message tip-bottom" title="" data-original-title="Manage Users"><i class="icon-user"></i></a>
-      <a class="top_message tip-bottom" title="" data-original-title="Manage Comments"><i class="icon-comment"></i><span class="label label-important">5</span></a>
-      <a class="top_message tip-bottom" title="" data-original-title="Manage Orders"><i class="icon-shopping-cart"></i></a>
-    </div> -->
     <div id="user-nav" class="navbar navbar-inverse" style="border-color: #47475c;top:-2px;">
       <ul class="nav">
-        <!-- <li class=""><a href="<?= base_url('mastercms/perusahaan'); ?>"><i class="icon icon-user"></i><span class="text" style="color: #fff"> Pengguna</span></a></li> -->
-        <li class=""><a href="#myProfil" data-toggle="modal"><i class="icon-user"></i><span class="text" style="color: #fff"> Pengguna</span></a></li>
+        <!-- <li class="dropdown" >
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-user"></i><span class="text" style="color: #fff"> Pengguna</span></a>
+            <ul>
+                <li class="dropdown-menu"><a href="#myProfil" data-toggle="modal">Profil</a></li>
+                <li class="dropdown-menu">Ubah</li>
+            </ul>
+        </li> -->
+        <li class="dropdown" ><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-user"></i> <span class="text" style="color: #fff">Pengguna</span> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a class="" title="" href="#myProfil" data-toggle="modal">Profil</a></li>
+                <li><a class="" title="" href="#ubahPassword" data-toggle="modal">Ubah Password</a></li>
+            </ul>
+        </li>
         <li class=""><a href="#logout"><i class="icon-share-alt"></i> <span class="text" style="color: #fff">Keluar</span></a></li>
+
+
     </ul>
-    </div>
+</div>
     <!-- Modal -->
     <div class="light-modal" id="logout" role="dialog" aria-labelledby="light-modal-label" aria-hidden="false">
       <div class="light-modal-content  animated zoomInUp">
@@ -93,7 +99,7 @@
     <div id="myProfil" class="modal hide">
         <div class="modal-header">
             <button data-dismiss="modal" class="close" type="button">×</button>
-            <h3>Profil Pengguna</h3>
+            <h3 clas>Profil Pengguna</h3>
         </div>
         <div class="modal-body">
             <table class="table">
@@ -137,6 +143,39 @@
             </table>
         </div>
         <div class="modal-footer"> <a class="btn btn-warning" href="<?php echo base_url('mastercms/perusahaan/editprofil/').$profil['perusahaan_id']; ?>">Edit</a> <a data-dismiss="modal" class="btn" href="#">Tutup</a> </div>
+    </div>
+    <!-- modal end -->
+
+    <!-- modal ubah password -->
+    <div id="ubahPassword" class="modal hide">
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">×</button>
+            <h3 clas>Ubah Password</h3>
+        </div>
+        <div class="modal-body">
+            <form action="<?php echo base_url('mastercms/login/ubah_password/'); ?>" method="post" class="form-horizontal" name="basic_validate" id="basic_validate" >
+            <div class="row-fluid">
+                <!-- <div class="span6"> -->
+                    <div class="widget-box">
+                        <div class="widget-content nopadding">
+                            
+                                <div class="control">
+                                    <label class="control-label">Password Baru :</label>
+                                    <div class="controls">
+                                        <input type="password" class="span11" name="password" placeholder="Masukkan Password Baru Anda" required="required" />
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    </div>
+                <!-- </div> -->
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" type="submit" href="<?php echo base_url('mastercms/login/ubah_password/'); ?>">Ubah</button>
+            <a data-dismiss="modal" class="btn" href="#">Tutup</a>
+        </div>
+        </form>
     </div>
     <!-- modal end -->
     

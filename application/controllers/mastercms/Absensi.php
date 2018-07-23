@@ -91,30 +91,13 @@ class Absensi extends MY_Controller
         $data['bulan'] = $bulan;
         $data['tahun'] = $tahun;
         $data['lokasi_id'] = "";
-        // yuni edit start
+    
         $data['karyawan'] = $this->Mabsensi->get_karyawan_by_lokasi();
         $data['jml_hari_kerja'] = $this->Mabsensi->jumlah_hari_kerja($bulan, $tahun);
         $data['presensi'] = $this->Mabsensi->presensi_per_karyawan($bulan, $tahun);
         $data['kehadiran'] = $this->Mabsensi->kehadiran($bulan, $tahun);
-        // yuni edit end
 
-
-        // if ($this->input->post()) { //Perintah yg dijalankan saat user mengklik lokasi perusahaan yg dipilih
-            // $input = $this->input->post();
-            // $lokasi_id = $input['lokasi_id'];
-            // $bulan = date('m');
-            // $tahun = date('Y');
-
-            // $data['bulan'] = $bulan;
-            // $data['tahun'] = $tahun;
-            // $data['karyawan'] = $this->Mabsensi->semua_karyawan($lokasi_id);
-            // $data['lokasi_id'] = $lokasi_id;
-            // $data['lokasi'] = $this->Mabsensi->lokasi_by_id($lokasi_id);
-            // $data['jml_hari_kerja'] = $this->Mabsensi->jml_hari_kerja($lokasi_id, $bulan, $tahun);
-            // $data['presensi'] = $this->Mabsensi->presensi_per_karyawan($bulan, $tahun);
-            // $data['kehadiran'] = $this->Mabsensi->kehadiran($bulan, $tahun);
-        // }
-        if ($this->input->post('cari')) //Perintah yg dijalankan saat tombol cari diklik (methode formnya "GET")
+        if ($this->input->post('cari')) //Perintah yg dijalankan saat tombol cari diklik (methode formnya "POST")
         { 
 
             $input = $this->input->post();
@@ -143,18 +126,6 @@ class Absensi extends MY_Controller
             $data['presensi'] = $this->Mabsensi->presensi_per_karyawan($bulan, $tahun);
             $data['kehadiran'] = $this->Mabsensi->kehadiran($bulan, $tahun);
             
-        }
-        else //Perintah yg dijalankan pada saat user belum mengklik lokasi perusahaan
-        { 
-            // $lokasi_id = "";
-            // $data['lokasi'] = "";
-            // $bulan = date('m');
-            // $tahun = date('Y');
-
-            // $data['bulan'] = $bulan;
-            // $data['tahun'] = $tahun;
-            // $data['karyawan'] = $this->Mabsensi->semua_karyawan($lokasi_id);
-            // $data['kehadiran'] = $this->Mabsensi->kehadiran($bulan,$tahun);
         }
         
         $this->render_page('backend/report/summary', $data);

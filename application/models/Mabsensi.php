@@ -21,14 +21,6 @@ class Mabsensi extends CI_Model
 			WHERE date(a.tanggal) = CURDATE() AND l.perusahaan_id = '$id' 
 			ORDER BY a.jam_masuk_absen DESC ");
 		return $data->result_array();
-
-		// $perusahaan_id	= $_SESSION['user']['perusahaan_id'];
-		// $this->db->where('_lokasi.perusahaan_id', $perusahaan_id);
-		// $this->db->join('_lokasi', '_lokasi.lokasi_id = _karyawan.lokasi_id', 'left');
-		// $this->db->join('_karyawan', '_karyawan.karyawan_id = _absensi.karyawan_id', 'left');
-		// $this->db->order_by('_absensi.tanggal', 'DESC');
-		// $ambil = $this->db->get('_absensi');
-		// return $ambil->result_array();
 	}
 	public function get_cabang(){
 		$perusahaan_id	= $_SESSION['user']['perusahaan_id'];
