@@ -9,7 +9,7 @@
 
     <div class="row-fluid">
       <div class="span12">
-        <form name="filterFrm" action="" method="get">
+        <form name="filterFrm" action="" method="post">
           <div class="span5">
             <div class="controls">
               <select  name="lokasi_id">
@@ -74,7 +74,7 @@
         <div class="accordion" id="collapse-group">
             <?php foreach ($cabang as $key => $value): ?>
               <?php $lokasi_id = $value['lokasi_id']; ?>
-              
+
             <div class="accordion-group widget-box">
               <div class="accordion-heading">
                 <div class="widget-title">

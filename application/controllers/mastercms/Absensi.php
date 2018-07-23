@@ -99,7 +99,7 @@ class Absensi extends MY_Controller
         // yuni edit end
 
 
-        if ($this->input->post()) { //Perintah yg dijalankan saat user mengklik lokasi perusahaan yg dipilih
+        // if ($this->input->post()) { //Perintah yg dijalankan saat user mengklik lokasi perusahaan yg dipilih
             // $input = $this->input->post();
             // $lokasi_id = $input['lokasi_id'];
             // $bulan = date('m');
@@ -113,19 +113,19 @@ class Absensi extends MY_Controller
             // $data['jml_hari_kerja'] = $this->Mabsensi->jml_hari_kerja($lokasi_id, $bulan, $tahun);
             // $data['presensi'] = $this->Mabsensi->presensi_per_karyawan($bulan, $tahun);
             // $data['kehadiran'] = $this->Mabsensi->kehadiran($bulan, $tahun);
-        }
-        elseif ($this->input->get('cari')) //Perintah yg dijalankan saat tombol cari diklik (methode formnya "GET")
+        // }
+        if ($this->input->post('cari')) //Perintah yg dijalankan saat tombol cari diklik (methode formnya "GET")
         { 
 
-            $input = $this->input->get();
+            $input = $this->input->post();
             $lokasi_id = $input['lokasi_id'];
-            if (!empty($this->input->get('cari'))) 
+            if (!empty($this->input->post('cari'))) 
             {
                 $bulan = $input['bulan'];
                 $tahun = $input['tahun'];
 
             }
-            elseif (!empty($this->input->get('reset'))) 
+            elseif (!empty($this->input->post('reset'))) 
             {
                 $bulan = date('m');
                 $tahun = date('Y');
