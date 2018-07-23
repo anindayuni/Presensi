@@ -81,7 +81,7 @@
                   <a data-parent="#collapse-group" href="#collapse-<?= $key;?>" data-toggle="collapse">
                     <span class="icon"><i class="icon-folder-open"></i></span><h5><?php echo $value['lokasi_nama']; ?></h5>
                   </a>
-                  <span class="label label-success" style="margin-bottom: 8px;" align="right"><a style="color: #fff;" href="<?php echo base_url('mastercms/absensi/export_excel/'.$lokasi_id.'/'.$bulan.'/'.$tahun); ?>"><i class="icon-print"></i>  Export to Excel</a></span>
+                  <!-- <span class="label label-success" style="margin-bottom: 8px;" align="right"><a style="color: #fff;" href="<?php echo base_url('mastercms/absensi/export_excel/'.$lokasi_id.'/'.$bulan.'/'.$tahun); ?>"><i class="icon-print"></i>  Export to Excel</a></span> -->
 
                 </div>
               </div>
@@ -89,8 +89,10 @@
                 <div class="widget-content nopadding">
                   <div class="widget-title">
                     <span class="icon"><i class="icon-th"></i></span> 
-                    <h5>Ringkasan Presensi Bulan</h5>
-
+                    <!-- <h5>Ringkasan Presensi Bulan</h5> -->
+                    <h5 style="padding-top: 0px; margin-top: 0px;">
+                    <span class="label label-success" align="left"><a style="color: #fff;" href="<?php echo base_url('mastercms/absensi/export_excel/'.$lokasi_id.'/'.$bulan.'/'.$tahun); ?>"><i class="icon-print"></i>  Export to Excel</a></span>
+                  </h5>
                   </div>
 
                   <table class="table table-bordered data-table">
@@ -102,7 +104,7 @@
                         <th width="10%;">Masuk</th>
                         <th width="10%;">Terlambat</th>
                         <th width="10%;">Sakit</th>
-                        <th width="10%;">Ijin</th>
+                        <th width="10%;">Izin</th>
                         <th width="10%;">Cuti</th>
                         <th width="10%;">Absen</th>
                         <th width="5%;">Aksi</th>
@@ -119,7 +121,7 @@
                                   <td>
                                     <?php
                                     foreach ($kehadiran as $key => $kehad) :
-                                      if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="masuk kerja")
+                                      if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="Masuk Kerja")
                                         { echo $kehad['jumlah']; }
                                     endforeach;
                                     ?>
@@ -127,7 +129,7 @@
                                   <td>
                                     <?php
                                     foreach ($kehadiran as $key => $kehad) :
-                                      if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="terlambat")
+                                      if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="Terlambat")
                                         {  echo $kehad['jumlah']; }
                                     endforeach;
                                     ?>
@@ -135,7 +137,7 @@
                                   <td>
                                     <?php
                                     foreach ($kehadiran as $key => $kehad) :
-                                      if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="sakit")
+                                      if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="Sakit")
                                         { echo $kehad['jumlah']; }
                                     endforeach;
                                     ?>
@@ -143,7 +145,7 @@
                                   <td>
                                     <?php
                                     foreach ($kehadiran as $key => $kehad) :
-                                      if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="ijin")
+                                      if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="Izin")
                                         { echo $kehad['jumlah']; }
                                     endforeach;
                                     ?>
@@ -151,7 +153,7 @@
                                   <td>
                                     <?php
                                     foreach ($kehadiran as $key => $kehad) :
-                                      if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="cuti")
+                                      if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="Cuti")
                                         { echo $kehad['jumlah']; }
                                     endforeach;
                                     ?>
@@ -209,7 +211,7 @@
                         <th width="10%;">Masuk</th>
                         <th width="10%;">Terlambat</th>
                         <th width="10%;">Sakit</th>
-                        <th width="10%;">Ijin</th>
+                        <th width="10%;">Izin</th>
                         <th width="10%;">Cuti</th>
                         <th width="10%;">Absen</th>
                         <th width="5%;">Aksi</th>
@@ -226,7 +228,7 @@
                             <td>
                               <?php
                               foreach ($kehadiran as $key => $kehad) :
-                                if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="masuk kerja")
+                                if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="Masuk Kerja")
                                   { echo $kehad['jumlah']; }
                               endforeach;
                               ?>
@@ -234,7 +236,7 @@
                             <td>
                               <?php
                               foreach ($kehadiran as $key => $kehad) :
-                                if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="terlambat")
+                                if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="Terlambat")
                                   {  echo $kehad['jumlah']; }
                               endforeach;
                               ?>
@@ -242,7 +244,7 @@
                             <td>
                               <?php
                               foreach ($kehadiran as $key => $kehad) :
-                                if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="sakit")
+                                if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="Sakit")
                                   { echo $kehad['jumlah']; }
                               endforeach;
                               ?>
@@ -250,7 +252,7 @@
                             <td>
                               <?php
                               foreach ($kehadiran as $key => $kehad) :
-                                if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="ijin")
+                                if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="Izin")
                                   { echo $kehad['jumlah']; }
                               endforeach;
                               ?>
@@ -258,7 +260,7 @@
                             <td>
                               <?php
                               foreach ($kehadiran as $key => $kehad) :
-                                if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="cuti")
+                                if ($kehad['karyawan_id'] == $kary['karyawan_id'] && $kehad['status']=="Cuti")
                                   { echo $kehad['jumlah']; }
                               endforeach;
                               ?>
