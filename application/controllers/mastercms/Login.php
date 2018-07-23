@@ -76,5 +76,23 @@ class Login extends CI_Controller
 		}
 		$this->load->view('backend/reset_password'); //Form reset password perusahaan
 	}
+
+	function ubah_password()
+	{
+		$email = $_SESSION['user']['perusahaan_email'];
+		if ($this->input->post())
+		{
+			$pass = $this->input->post('password');
+			$input['perusahaan_password'] = md5(md5($pass));
+
+			$update = $this->Mperusahaan->change_password($email, $input);
+
+			if ($update == "berhasil") {
+				// $this->session->set_flashdata('msg', '<div class="alert alert-info">Password Berhasil Diubah</div>');
+				// redirect('mastercms/home');
+				echo "<script>alert('Password Berhasil Diubah');location='".base_url("mastercms/home")."'</script>";
+			}
+		}
+	}
 }
 ?>
